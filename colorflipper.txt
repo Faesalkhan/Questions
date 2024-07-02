@@ -41,3 +41,31 @@ function getRandomNumber() {
 }
 
 
+======================================================
+keep index.html same 
+
+index.js --------------------
+const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
+const color = document.querySelector(".color");
+const btn = document.addEventListener("click", function () {
+// let randomNumber = getRandomNumber();
+  let hexColors = "#";
+  for (let i = 0; i < 6; i++) {
+    hexColors = hexColors + hex[getrandomNumber()];
+  }
+  document.body.style.backgroundColor = hexColors;
+  color.innerText = hexColors;
+});
+function getrandomNumber() {
+  return Math.floor(Math.random() * hex.length);
+}
+
+// for storing 6 digits color code, we used for loop and stored random array value.
+
+// let randomNumber = getRandomNumber();
+it'll not work, getRandomNumber() will select any index no of array, same will be used again and again
+so we will get similar set of no.s like #444444, #FFFFFF .....
+
+
+
+
