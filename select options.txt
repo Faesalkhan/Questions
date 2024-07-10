@@ -1,0 +1,72 @@
+import React, { useState } from "react";
+const App = () => {
+  const [reason, setReason] = useState("select the reason");
+  const handleReasonChange = (event) => {
+    setReason(event.target.value);
+  };
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col-6 mx-auto ">
+          <label className="mx-3">Select category</label>
+          <select value={reason} onChange={handleReasonChange}>
+            <option selected disabled value="select the reason">
+              select the reason
+            </option>
+            <option value="educational">educational</option>
+            <option value="adventure">adventure</option>
+            <option value="thrill">thrill</option>
+            <option value="action">action</option>
+            <option value="drama">drama</option>
+            <option value="web series">web series</option>
+          </select>
+        </div>
+        <div className="col-12">
+          {reason === "educational" && (
+            <ul>
+              <li>good will hunting</li>
+              <li>interstellar</li>
+              <li>dead poet society</li>
+            </ul>
+          )}
+          {reason === "thrill" && (
+            <ul>
+              <li>shawshank redemption</li>
+              <li>squid game</li>
+              <li>inception</li>
+              <li>min hunters</li>
+            </ul>
+          )}
+          {reason === "action" && (
+            <ul>
+              <li>captain america</li>
+              <li>avengers</li>
+              <li>thor</li>
+              <li>spiderman</li>
+            </ul>
+          )}
+          {reason === "adventure" && (
+            <ul>
+              <li>life of pi</li>
+              <li>dora</li>
+            </ul>
+          )}
+          {reason === "drama" && (
+            <ul>
+              <li>mind your language</li>
+            </ul>
+          )}
+          {reason === "web series" && (
+            <ul>
+              <li>squid game</li>
+              <li>mind hunters</li>
+              <li>Dark</li>
+              <li>Rick and Morty</li>
+            </ul>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+export default App;
