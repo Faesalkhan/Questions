@@ -1,3 +1,5 @@
+https://www.freecodecamp.org/news/react-state-management/
+
 what is state? -----------------------
 state is a dynamic data storage that provides a mechanism for components to manage, keep track of changing data, and trigger re-rendering when it is updated. 
 Any update to the data will cause the component to re-render.
