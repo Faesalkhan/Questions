@@ -1,0 +1,80 @@
+what is state? -----------------------
+state is a dynamic data storage that provides a mechanism for components to manage, keep track of changing data, and trigger re-rendering when it is updated. 
+Any update to the data will cause the component to re-render.
+
+Now that you know what state means, you can visualize an application even before building it and have an idea of what data would be stored in different states. This brings us to a point I like to call: ‘Thinking In React’.
+
+how to use the useState ?--------------------------
+suppose we want to make a todo application. we know that it will have task names and we will need a list like table to display all of them or array to store all of them. so we have 'names' , 'listitems' in app, that will change.
+so 
+
+const [name, setName] = usState('');
+const [items, setItems] = useState([]);
+
+name and items hold the current value of the state variable. While setName and setItems are the functions used to update the value of the state variables.
+
+Our root component should look like this:
+import { useState } from "react";
+export default function App() {
+  	const [items, setItems] = useState([]);
+	const [name, setName] = useState(" ")
+  return (
+    <div>
+      <Header />
+      <Nav />
+      <ListArea />
+      <Footer />
+    </div>
+  );
+}
+
+The individual components with their JSX's should look like this
+
+function Header() {
+  return <h2>ToDo List</h2>;
+}
+
+function Nav() {
+  return (
+    <>
+      <input type="text"/>
+      <button>Add</button>
+    </>
+  );
+}
+
+function ListArea() {
+  return (
+    <>
+      <ul>
+        <li></li>
+      </ul>
+    </>
+  );
+}
+
+function Footer() {
+  return (
+    <>
+      <p>You have items in your cart</p>
+    </>
+  );
+}
+
+this is simple structure of todo app. next we need a simple logic to make state comes in life. where to use state??  for now state are in App component.
+
+types of state --------------------
+Global state : It is always declared and located in the root component of your app. These are states that are accessible to every component in the application. (state declared in root component, can be used in 2/more child components)
+
+Local state : Local states refers to the internal data maintained by a component. They are only needed and can be accessed in the component.
+Using local state, components can independently change and handle their data. (state declared in a component is a local state for that component)
+
+so we can say that 'name' is local state as we are using it in input.
+(so instead of declaring it in App/root component, we can declare it in 'Nav' component)
+
+and 'items' is a global state, 2/more child components will access it.
+(so declare it in root level component).
+
+
+
+
