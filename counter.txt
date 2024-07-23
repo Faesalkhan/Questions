@@ -1,0 +1,27 @@
+import React, { useState } from "react";
+
+const Counter=()=>{
+    const [count, setCount] = useState(0);
+    const handleDec=()=>{
+setCount(x=> x-1);
+    }
+    const handleInc=()=>{
+setCount(x=> x+1);
+    }
+    const handleRes=()=>{
+        setCount(0);
+    }
+    return(
+        <div className="container">
+            <div className="row">
+                <div className="col-6 mx-auto">
+                    <h2>count is {count}</h2>
+                    <button className="btn btn-light" onClick={handleDec}>Decrease</button>
+                    <button className="btn btn-light mx-2" onClick={handleRes}>reset</button>
+                    <button className="btn btn-light" onClick={handleInc}>Increase</button>
+                </div>
+            </div>
+        </div>
+    )
+}
+export default  Counter;
