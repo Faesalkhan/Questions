@@ -1,0 +1,29 @@
+import React, { useState } from "react";
+const Log=()=>{
+    const [login, setLogin] = useState(false);
+const handleLogin=()=>{
+    setLogin(true);
+}
+const handlelogout=()=>{
+    setLogin(false);
+}
+    return(
+        <div className="container">
+            <div className="row">
+                <div className="col-6 mx-auto p-2">
+                    {
+                        login ?  <div className="border">
+                        <h5>you are logged in</h5>
+                        <button className="btn btn-light" onClick={handlelogout}>click to Logout</button>
+                    </div> : 
+                    <div className="border">
+                        <h5>you are logged out</h5>
+                        <button className="btn btn-light" onClick={handleLogin}>click to Login</button>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    )
+}
+export default Log;
