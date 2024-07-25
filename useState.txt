@@ -4,6 +4,18 @@ Any update to the data will cause the component to re-render.
 
 Now that you know what state means, you can visualize an application even before building it and have an idea of what data would be stored in different states. This brings us to a point I like to call: ‘Thinking In React’.
 
+when to use useState ? ----------------------------
+We can simply get the time (date) from the JS Date function. So we don't need state here.(variable derived from other data)
+
+A modal toggle (to show/hide a modal).
+Modal toggle can be true or false, and it's triggered when the user clicks a button. So, in this case we really need state, because we can't derive this kind of information.
+
+Be mindful of this difference – between what can be derived and what depends on the user.
+
+You'll want to use the useState hook when you need to store input from a user.
+
+💡As a rule of thumb, you should only use state to keep this kind of information – that requires the user to input data, or trigger events.
+
 how to use the useState ?--------------------------
 suppose we want to make a todo application. we know that it will have task names and we will need a list like table to display all of them or array to store all of them. so we have 'names' , 'listitems' in app, that will change.
 so 
