@@ -1,4 +1,3 @@
-https://www.freecodecamp.org/news/how-to-build-forms-in-react/
 import React, { useState } from "react";
 
 const Demo=()=>{
@@ -14,6 +13,15 @@ const Demo=()=>{
   const handleCheck=(e)=>{
     setCheckk(e.target.checked);
   }
+  const [formData, setFormData] = useState({name:"",email:"",message:""});
+  const handleChange=(e)=>{
+    const {name, value} = e.target;
+    setFormData((prevData)=> ({...prevData, [name]: value}));
+  }
+  const handleSubmit=()=>{
+    alert(`you have entered name = ${formData.name} , email = ${formData.email} and message = ${formData.message}`)
+  }
+
   return(
     <div className="container">
       <div className="row">
@@ -49,6 +57,23 @@ const Demo=()=>{
             {/* <p>you checked : {checkk}</p> */}
             {checkk && <p>Blue is selected</p>}
         </div>
+      </div>
+      <div className="row">
+        <form onSubmit={handleSubmit}>
+        <div className="col-4">
+          <label htmlFor="name" >Name</label><br/>
+          <input type="text" placeholder="name" id="name" name="name" value={formData.name} onChange={handleChange}></input>
+          </div>
+          <div className="col-4">
+          <label htmlFor="email" >Email</label><br/>
+          <input type="email" placeholder="email" id="email" name="email" value={formData.email} onChange={handleChange}></input>
+          </div>
+          <div className="col-4">
+          <label htmlFor="message">Message</label><br/>
+          <textarea placeholder="text your message here" id="message" name="message" value={formData.message} onChange={handleChange} ></textarea>
+          </div>
+          <button className="btn btn-primary" type="submit">submit</button>
+          </form>
       </div>
     </div>
   )
