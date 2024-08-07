@@ -1,0 +1,54 @@
+import React, { useState } from "react";
+
+const Demo = () => {
+    const [checks, setChecks] = useState([]);
+
+    const handleChecks = (e) => {
+        const { value } = e.target;
+        setChecks((prev) => 
+            prev.includes(value) 
+                ? prev.filter((check) => check !== value) 
+                : [...prev, value]
+        );
+    };
+
+    return (
+        <div className="container">
+            <div className="row">
+                <div className="col-4">
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={checks.includes('Books')}
+                            value="Books"
+                            onChange={handleChecks}
+                        />
+                        Books
+                    </label>
+                </div>
+                <div className="col-4">
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={checks.includes('Movies')}
+                            value="Movies"
+                            onChange={handleChecks}
+                        />
+                        Movies
+                    </label>
+                </div>
+                <div className="col-4">
+                    <label>
+                        <input type="checkbox" checked={checks.includes('Music')} value="Music" onChange={handleChecks}></input>
+                        Music
+                    </label>
+                </div>
+                <div className="col">
+                    <p>You selected: {checks.join(', ')}</p>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Demo;
