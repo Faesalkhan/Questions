@@ -1,0 +1,36 @@
+import React, { useState } from "react";
+
+const Demo=()=>{
+    const [selectOption, setSelectOption] = useState('option1');
+    const handleOptionsChange=(e)=>{
+        setSelectOption(e.target.value)
+    }
+    return(
+        <div className="container">
+            <div className="row">
+                <div className="col-4">
+                    <label>
+                        <input type="radio" value="option1" checked={selectOption==="option1"} onChange={handleOptionsChange}></input>
+                        Option1
+                    </label>
+                </div>
+                <div className="col-4">
+                    <label>
+                        <input type="radio" value="option2" checked={selectOption==="option2"} onChange={handleOptionsChange}></input>
+                        Option2
+                    </label>
+                </div>
+                <div className="col-4">
+                    <label>
+                        <input type="radio" value="option3" checked={selectOption==="option3"} onChange={handleOptionsChange}></input>
+                        Option3
+                    </label>
+                </div>
+                <div className="col">
+                    You Selected : {selectOption}
+                </div>
+            </div>
+        </div>
+    )
+}
+export default Demo;
