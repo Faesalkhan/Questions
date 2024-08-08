@@ -34,3 +34,42 @@ const Demo=()=>{
     )
 }
 export default Demo;
+
+-------------------------------------------------------------------------------------------------------------------------------------
+import React, { useState } from "react";
+
+const Demo=()=>{
+    const [checks, setChecks] = useState([]);
+    const [radiocheck, setRadioCheck]= useState('');
+    const handleoptionchange=(e)=>{
+        setRadioCheck(e.target.value);
+    }
+    return(
+        <div className="container">
+            <div className="row">
+               <div className="col-4">
+              <label>
+                <input type="radio" checked={radiocheck.includes('option1')} value="option1" onChange={handleoptionchange} ></input>
+                Option1
+              </label>
+               </div>
+               <div className="col-4">
+                <label>
+                    <input type="radio" checked={radiocheck.includes('option2')} value='option2' onChange={handleoptionchange}></input>
+                    Option2
+                </label>
+               </div>
+               <div className="col-4">
+                <label>
+                    <input type="radio" checked={radiocheck.includes('option3')} value='option3' onChange={handleoptionchange}></input>
+                    Option3
+                </label>
+               </div>
+               <div className="col-12">
+                you selected : {radiocheck}
+               </div>
+            </div>
+        </div>
+    )
+}
+export default Demo;
