@@ -1,0 +1,37 @@
+import React, { useEffect, useState } from "react";
+
+const FetchAPI = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchData = async () => {
+    try {
+      const fetchjson = await fetch(
+        "https://jsonplaceholder.typicode.com/posts"
+      );
+      const json = await fetchjson.json();
+      setData(json);
+    } catch (err) {
+      console.log("error in fetching the data from api : " + err);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+  return (
+    <div className="container">
+      <div className="row">
+        {data.map((user, index) => (
+          <div key={index} className="col-3 my-2">
+            <div className="p-2 border">
+              <p>{user.title}</p>
+              <hr />
+              <p>{user.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+export default FetchAPI;
