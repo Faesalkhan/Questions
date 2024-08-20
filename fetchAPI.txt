@@ -35,3 +35,49 @@ const FetchAPI = () => {
   );
 };
 export default FetchAPI;
+
+----------- handling async operations using async await ----------------
+import React, { useEffect, useState } from "react";
+
+const Demo = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchdata = await fetch(
+          "https://jsonplaceholder.typicode.com/posts"
+        );
+        const jsondata = await fetchdata.json();
+        setData(jsondata);
+        setLoading(false);
+      } catch (err) {
+        console.log("error in fetching is : " + err);
+      }
+    };
+    fetchData();
+  }, []);
+
+  return (
+    <div className="container">
+      <div className="row">
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <>
+            {data.map((user, index) => (
+              <div className="col-3">
+                <div className="p-2 border">
+                  <h5>{user.title}</h5>
+                  <p>{user.body}</p>
+                </div>
+              </div>
+            ))}
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+export default Demo;
