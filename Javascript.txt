@@ -1,0 +1,34 @@
+The programs in this language are called scripts. They can be written right in a web page’s HTML and run automatically as the page loads.
+Javascript was created to make 'web pages alive'.
+It not only run in the browser but also on server, actually on any device having 'JS Engine'.
+Browser has embedded engine called 'Js Virtual Machine'. chrome has V8.
+
+how engine works ?
+The engine (embedded if it’s a browser) reads (“parses”) the script.
+Then it converts (“compiles”) the script to machine code.
+And then the machine code runs, pretty fast.
+
+JS capabilities depends on the environment on which it is running.
+e.g : in browser JS is able to 
+1) adding new HTML page, modifying it(content and styles).
+2) event handling, mouse click, mouse hover, key presses.
+3) send requests to remote server. download files, upload files.
+4) remember the data on client side (local storage)
+5) ask questions to visitors, display messages.
+
+limitation to JS is limited to protect user's safety.
+JS on webpage may not read/write/copy/execute any arbitrary file on the hard disc.
+(no direct access to Operating System functions).
+file is accessed only through <input> or 'dropping' (if provided).
+camera, microphone ... are required user's persission to enable them.
+(js enabled webpage will not sneakily enable these and send data to another site)
+if any webpage is opened, then only this will be open.
+
+uniqueness of JS?
+full integration with HTML/CSS.
+simple things are done simply.
+supported by all major browsers.
+
+JavaScript is the only browser technology that combines these three things.
+That said, JavaScript can be used to create servers, mobile applications, etc.
+
