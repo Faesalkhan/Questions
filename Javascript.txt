@@ -3,7 +3,7 @@ Javascript was created to make 'web pages alive'.
 It not only run in the browser but also on server, actually on any device having 'JS Engine'.
 Browser has embedded engine called 'Js Virtual Machine'. chrome has V8.
 
-how engine works ?
+how engine works------------------ ?
 The engine (embedded if it’s a browser) reads (“parses”) the script.
 Then it converts (“compiles”) the script to machine code.
 And then the machine code runs, pretty fast.
@@ -31,4 +31,45 @@ supported by all major browsers.
 
 JavaScript is the only browser technology that combines these three things.
 That said, JavaScript can be used to create servers, mobile applications, etc.
+
+In the world of computer, there is only data. we can create,remove,modify the data.
+data is stored into bits(in the form of 0,1).
+there is lot / millions of data. a part of it is a value.
+value could be of type (string, number, boolean, function).
+we just invoke the value to use it. if i want to use a number i'll simply use it by creating it.
+
+part of code that holds the value is called 'expression'. multiple expression make statement. program consist of many statements.
+
+Operators ---------------------------
+unary operator : operator acting on a single value is unary operator. e.g : 'typeof'
+binary operator : operator taking 2 values is binary operator.
+ternary operator : operator taking 3 values is ternary operator.
+
+Statements--------------------------- :
+commands that performs the actions.
+we can add as many statements as we want, we can separate them by ;.
+e.g : alert('Hello world') shows a alert on webpage.
+
+in most cases, a new line implies a semicolon. but it is not always true.
+e.g  : alert(3
++1+
+2);
+
+it'll show a alert having 6 in it.
+js does not insert semicolon here, as line is ending with + (i.e 'incomplete expression'),
+so ; there would be incorrect. (so working fine).
+
+alert("Hello");
+[1, 2].forEach(alert);
+'Hello' alert will be shown, then '1' & '2' will be shown.
+
+alert("Hello")
+[1, 2].forEach(alert);
+'Hello' alert will be shown, alert with not proper reading value will be shown.
+
+here is how engine see it,
+alert("Hello")[1, 2].forEach(alert);
+
+--nested comments not supported
+There may not be /*...*/ inside another /*...*/.
 
