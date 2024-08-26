@@ -1,11 +1,13 @@
-The programs in this language are called scripts. They can be written right in a web page’s HTML and run automatically as the page loads.
+The program oftern referred as code/script is set of special instructions to tell the computers what task to perform.
+They can be written right in a web page’s HTML/developer console and run automatically as the page loads.
 Javascript was created to make 'web pages alive'.
+the rules for valid instructions and format is called syntax/computer language.
 It not only run in the browser but also on server, actually on any device having 'JS Engine'.
 Browser has embedded engine called 'Js Virtual Machine'. chrome has V8.
 
 how engine works------------------ ?
 The engine (embedded if it’s a browser) reads (“parses”) the script.
-Then it converts (“compiles”) the script to machine code.
+Then it converts (“compiles”) the script to machine code (utility called 'compiler' / 'interpreter' do this).
 And then the machine code runs, pretty fast.
 
 JS capabilities depends on the environment on which it is running.
@@ -46,9 +48,23 @@ binary operator : operator taking 2 values is binary operator.
 ternary operator : operator taking 3 values is ternary operator.
 
 Statements--------------------------- :
-commands that performs the actions.
-we can add as many statements as we want, we can separate them by ;.
+commands (group of words numbers and operators) that performs the task is called statement.
+we can add as many statements as we want in our program, we can separate them by semicolon (;)
 e.g : alert('Hello world') shows a alert on webpage.
+e.g : a = b * 2 ;
+
+Expression ------------------------- :
+statements are made up of one or more expressions. 
+An expression is any reference to a variable or value, or set of variable and values combined with operators.
+e.g: a = b * 2;
+here are 4 expressions,
+2 is literal value expression.
+b is variable expression, to retrive its current value.
+b * 2 is arithmetic expression.
+a = b * 2 is assignment expression.
+
+e.g : alert(a);
+this is a call expression statement, as entire statement is the function call expression itself.
 
 in most cases, a new line implies a semicolon. but it is not always true.
 e.g  : alert(3
@@ -73,3 +89,139 @@ alert("Hello")[1, 2].forEach(alert);
 --nested comments not supported
 There may not be /*...*/ inside another /*...*/.
 
+Operators --------------------
+assign operator(=) : it is used for assignment, value on the RHS(source value) is calculated and then put it into the variable we specify
+on the LHS(target variable).
+Math : +,-,*,/.
+Increment : ++, -- .
+Compound : +=, -=, *=, /=.
+Equality : ==, ===, !=, !==.
+comparison : <, >, <=, >= 
+logical : &&, ||.
+object propert access (dot operator) : 'Obj.a' means object value called Obj with a property of the name 'a'.
+or we can access like Obj["a"].
+
+Value and Types ----------------------------
+if you go to a phone store and ask employee for cost of a phone, he says '15000'.(actual rupee figure).
+if you want to buy 2 of them, you can simply double the price of the phone. (15000*2 = 30000).
+if you pick another phone and he says 'its free', by the word 'free' you understand the cost is 0.00.
+when you later ask if it includes a charger or not, he would say 'yes' / 'no'.
+
+in similar way we express the values in program. we choose different 'types' for different values.
+JS has built in types for each primitive values.
+1. when we need to do math operations we need 'number'.
+2. print a value on screen we need 'string' (1 or more characters, word, sentence).
+3. when you make a decision, you need a boolean (yes/no).
+
+array, function, object are also values types.
+
+Type conversion ---------------------------
+when we want to print a number on console, we need to convert that no. into string first. this conversion is called 'coersion'.
+if you need to use them as number to perform the math operations we need to coerce it to number.
+
+let a = '45';
+let b = Number(a);
+console.log(a);         // '45'
+console.log(b);         // 45
+
+this is the example of explicit coersion. (we are converting one type of type value to another one).
+when two values compared are not of equal value type, JS implicitly kicks in and covert the value type to mathcing value types.
+(implicit coersin).
+
+Variables ------------------------------(managing the program state)
+we need to track a value as it changes over the course of the program, undergoing different operations.
+easiest way to do so is to assign a value to a symbolic container, called 'variable'.
+JS variable can hold any value of any type without specifying its value type.
+
+let amt = 99.99;
+amt = amt * 2;
+console.log(amt);                 //99.99 
+amt = "$" + String(amt);
+console.log(amt) ;                // '199.98'
+
+'const' is used to declare a variable, which will not change its value.
+
+Blocks ---------------------------
+a block is defined by wrapping one or more statements inside a curly brace pair {...} .
+
+let amt = 99.99;
+ {
+   amt  = amt * 2;
+   console.log(amt);
+ }
+
+these types of blocks are not generally seen. rather blocks with loops, if statement is generally seen.
+block statement does not need semicolon ; to conclude it.
+
+Conditionals -------------------------
+if a store employee tells you if you could purchase screen protection glass to phone, first you need to check your 
+current bank balance (current state of your bank balance).
+"if the condition is true then, do the following"
+
+let amt  = 99.99;
+let bank_bal  = 400;
+
+if(amt < bank_bal){
+ console.log('I want to purchase the phone');
+}
+
+if statement requires an expression between () either true / false.
+if you pass there something that is not a boolean, coersion will occur.
+
+we can also provide the else{} block if our condition is not true.
+
+0, ''/"", null, undefined  ------> falsy
+'something', -1, 99.99.... ------> truthy
+
+Loops -----------------------
+repeating a certain actions untill a certain condition fails. 
+or we can say that repeating only while the condition holds.
+(a bowler repeats bowling till the over ends or bowler gets unfit).
+each time the loop block executes is called 'iteration'.
+
+
+Functions -------------------
+there could be a calculations for final phone purchase. she need to use that again and again for every purchase.
+here we could use the function. define it at once and use it again and again just by invoking its name using ().
+
+function printAmt(amount){
+  console.log(amount.toFixed(2));
+}
+
+let amount = 99.99;
+printAmt(amount);                  // 99.99
+
+function formatAmt(amt){
+  return '$'+ amt.toFixed(2);
+}
+
+var amount = 99.99;
+printAmount( amount * 2 );          // "199.98"
+amount = formatAmount();
+console.log( amount );              // "$99.99"
+ 
+Scope ---------------------------
+if you ask for a phone model, she will check the store's inventory. if not found, we have to go to another store.
+in programming we have scope/lexical scope.
+each function gets its own scope.
+it is a collection of varibles as well as rules for how those variables can be accessed by name.
+Only code inside that function can access that function’s scoped variables.
+
+function outer() {
+  var a = 10;
+
+  function inner() {
+    var b = 20;
+    console.log(a+b);        // here both 'a' & 'b' can be accessed
+  }
+
+  inner();
+  console.log(a);            // here only 'a' can be accessed
+}
+outer();
+
+Lexical scope rules say that code in one scope can access variables of
+either that scope or any scope outside of it.
+So, code inside the inner() function has access to both variables a
+and b, but code only in outer() has access only to a—it cannot
+access b because that variable is only inside inner().
