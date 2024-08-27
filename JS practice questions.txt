@@ -1,0 +1,15 @@
+display current day and time ------------------------------------
+let date = new Date();
+const arr = ["sun", "mon", "tue", "wed", "thur", "fri", "sat"];
+
+// Get the day of the week (0-6, where 0 is Sunday and 6 is Saturday)
+let today = date.getDay();
+console.log("today is : " + arr[today]);
+
+let hrs = date.getHours();
+let mins = date.getMinutes();
+let secs = date.getSeconds();
+
+let prepend = hrs >= 12 ? "PM" : "AM";
+hrs = hrs >= 12 ? hrs - 12 : hrs;
+console.log("current time is : " + hrs + prepend + ":" + mins + ":" + secs);
