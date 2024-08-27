@@ -28,3 +28,12 @@ if (mm < 10) {
 }
 console.log(dd + "/" + mm + "/" + yy);
 
+guess the generated number --------------------------------------
+let random = Math.ceil(Math.random() * 10);
+let enter = prompt("enter a number");
+if (random == enter) {
+  alert("you guessed the right no.");
+} else {
+  console.log("wrong guess, the no. was : " + random);
+}
+
