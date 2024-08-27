@@ -37,3 +37,43 @@ if (random == enter) {
   console.log("wrong guess, the no. was : " + random);
 }
 
+multiply and divide two numbers given by user --------------------------------- 
+<body>
+    <div>
+        <label for="firstnumber">first value : </label>
+        <input type="number" id="firstnumber" name="firstnumber" name="firstnumber">
+    </div>
+    <div style="margin-top: 20px">
+        <label for="secondNumber">Second Number</label>
+        <input type="number" id="secondnumber" name="secondnumber" name="secondnumber">
+    </div>
+    <div style="margin-top: 20px">
+        <button type="button" id="multiply">Multiply</button>
+        <button type="button" id="divide">Divide</button>
+    </div>
+    <div>
+        <h5>the result is : <span id="result"></span></h5>
+    </div>
+    <script src="./prac.js"></script>
+</body>
+
+let fnumber = document.getElementById("firstnumber");
+let snumber = document.getElementById("secondnumber");
+
+let mult = document.getElementById("multiply");
+let divi = document.getElementById("divide");
+
+let result = document.querySelector("#result");
+
+mult.addEventListener("click", function () {
+  let x = fnumber.value * snumber.value;
+  result.textContent = x;
+});
+
+divi.addEventListener("click", function () {
+  let y = fnumber.value / snumber.value;
+  result.textContent = y;
+});
+
+
+
