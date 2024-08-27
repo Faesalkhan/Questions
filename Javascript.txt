@@ -43,7 +43,18 @@ we just invoke the value to use it. if i want to use a number i'll simply use it
 part of code that holds the value is called 'expression'. multiple expression make statement. program consist of many statements.
 
 Operators ---------------------------
-unary operator : operator acting on a single value is unary operator. e.g : 'typeof'
+unary operator : operator acting on a single value is unary operator. e.g : 'typeof'.
+
+var a;                 typeof a; // "undefined"
+a = "hello world";     typeof a; // "string"
+a = 42;                typeof a; // "number"
+a = true;              typeof a; // "boolean"
+a = null;              typeof a; // "object"--weird !!!!, its a bug(fixing it will cause more)
+a = undefined;         typeof a; // "undefined"
+a = { b: "c" };        typeof a; // "object"
+see how 'a' is holding different type of value. typeof is not 'type of a' but rather 'type of value currently in a'.
+"only values have types in JS". variables are just simple container for those values.
+
 binary operator : operator taking 2 values is binary operator.
 ternary operator : operator taking 3 values is ternary operator.
 
@@ -115,7 +126,7 @@ JS has built in types for each primitive values.
 
 array, function, object are also values types.
 
-Type conversion ---------------------------
+Comparing values / Type conversion --------------------------- coersion.
 when we want to print a number on console, we need to convert that no. into string first. this conversion is called 'coersion'.
 if you need to use them as number to perform the math operations we need to coerce it to number.
 
@@ -127,6 +138,50 @@ console.log(b);         // 45
 this is the example of explicit coersion. (we are converting one type of type value to another one).
 when two values compared are not of equal value type, JS implicitly kicks in and covert the value type to mathcing value types.
 (implicit coersin).
+
+0, ''/"", null, undefined, false                  ------> falsy
+'something', -1, 99.99, array, obj, functions.... ------> truthy
+
+its important to remember that only non-boolean values follow 'truthy/falsy' if its actually coerced to a boolean.
+
+Equality : ==, ===, !=, !==.
+== checks for value equality.
+=== checks for both value and type.    it's inaccurate.
+
+== checks for value equality with coersion allowed.
+=== checks for value equality without coersion allowed ("strict equality").
+
+let a = 42;
+let b = "42";
+console.log(a == b);        // true
+console.log(a===b);         // false
+
+If either value (aka side) in a comparison could be the true or
+false value, avoid == and use ===.
+
+If either value in a comparison could be of these specific values
+(0, "", or []—empty array), avoid == and use ===.
+
+If you can be certain about the values, and == is safe, use it!.
+If you can’t be certain about the values, use ===. It’s that simple.
+
+comparing non-primitive values like functions, objects, arrays (they are actually held by references)
+== and === matched if references matches or not, not anything about underlying values.
+you might think that two arrays having same content will be == equal, but they are not.
+
+e.g array is coerced to simple strings joining all the values by ','.
+
+let arr = [1, 2, 3];
+let arr2 = [1, 2, 3];
+let arr3 = "1,2,3";
+console.log(arr2== arr3);       // true
+console.log(arr == arr2);       // false
+console.log(arr == arr3);       // true
+
+Notably, there
+are no “strict inequality” operators that would disallow coercion the
+same way === “strict equality” does.
+
 
 Variables ------------------------------(managing the program state)
 we need to track a value as it changes over the course of the program, undergoing different operations.
@@ -140,6 +195,26 @@ amt = "$" + String(amt);
 console.log(amt) ;                // '199.98'
 
 'const' is used to declare a variable, which will not change its value.
+
+variable name and function name must be a valid identifiers.
+An identifier must start with a-z, A-Z, $, or _. It can then contain any
+of those characters plus the numerals 0-9.
+
+let a = 4;
+let b10 = 43;
+let $d = 90;
+let _r = 9;
+console.log(a + b10 + $d + _r);
+
+same is apply for property name.
+let obj = {
+    name: "string",
+    name10: 12,
+    $name: true,
+    _name: false,
+}
+
+reserved words cannot be used for naming varible,function,property name (if,true,false,delete,for,in...)
 
 Blocks ---------------------------
 a block is defined by wrapping one or more statements inside a curly brace pair {...} .
@@ -170,7 +245,7 @@ if you pass there something that is not a boolean, coersion will occur.
 
 we can also provide the else{} block if our condition is not true.
 
-0, ''/"", null, undefined  ------> falsy
+0, ''/"", null, undefined, false  ------> falsy
 'something', -1, 99.99.... ------> truthy
 
 Loops -----------------------
@@ -225,3 +300,36 @@ either that scope or any scope outside of it.
 So, code inside the inner() function has access to both variables a
 and b, but code only in outer() has access only to a—it cannot
 access b because that variable is only inside inner().
+
+Object ----------------------------
+Object refers to a compound value where you can set properties that each hold their own values of any type.
+let obj = {
+ a : "hello there",
+ b : 34,
+ c : true,
+}
+obj.a;    // 'hello there'   or   obj["a"]    // 'hello there'
+[""] is useful when properties have special characters in it.(?/ *&!...)
+
+Array ----------------------------
+Array is an object that holds values of any type in numerically indexed positions.
+
+arr = ['hello', 42, true];
+typeof arr;                  // object
+
+they can also have properties, like 'length', arr.length;
+
+use array for numerically positioned values
+use object for named properties.
+
+function --------------------------
+it is a type of object, like obj it also can have properties (foo.bar in limited cases).
+
+Built-in methods -----------------
+let a = "hello there";
+let b = 3.14159;
+
+a.toUpperCase();            // "HELLO WORLD"
+b.toFixed(4)                // 3.1416
+
+
