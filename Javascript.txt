@@ -42,6 +42,20 @@ we just invoke the value to use it. if i want to use a number i'll simply use it
 
 part of code that holds the value is called 'expression'. multiple expression make statement. program consist of many statements.
 
+Value and Types ----------------------------
+if you go to a phone store and ask employee for cost of a phone, he says '15000'.(actual rupee figure).
+if you want to buy 2 of them, you can simply double the price of the phone. (15000*2 = 30000).
+if you pick another phone and he says 'its free', by the word 'free' you understand the cost is 0.00.
+when you later ask if it includes a charger or not, he would say 'yes' / 'no'.
+
+in similar way we express the values in program. we choose different 'types' for different values.
+JS has built in types for each primitive values.
+1. when we need to do math operations we need 'number'.
+2. print a value on screen we need 'string' (1 or more characters, word, sentence).
+3. when you make a decision, you need a boolean (yes/no).
+
+array, function, object are also values types.
+
 Operators ---------------------------
 unary operator : operator acting on a single value is unary operator. e.g : 'typeof'.
 
@@ -111,20 +125,6 @@ comparison : <, >, <=, >=
 logical : &&, ||.
 object propert access (dot operator) : 'Obj.a' means object value called Obj with a property of the name 'a'.
 or we can access like Obj["a"].
-
-Value and Types ----------------------------
-if you go to a phone store and ask employee for cost of a phone, he says '15000'.(actual rupee figure).
-if you want to buy 2 of them, you can simply double the price of the phone. (15000*2 = 30000).
-if you pick another phone and he says 'its free', by the word 'free' you understand the cost is 0.00.
-when you later ask if it includes a charger or not, he would say 'yes' / 'no'.
-
-in similar way we express the values in program. we choose different 'types' for different values.
-JS has built in types for each primitive values.
-1. when we need to do math operations we need 'number'.
-2. print a value on screen we need 'string' (1 or more characters, word, sentence).
-3. when you make a decision, you need a boolean (yes/no).
-
-array, function, object are also values types.
 
 Comparing values / Type conversion --------------------------- coersion.
 when we want to print a number on console, we need to convert that no. into string first. this conversion is called 'coersion'.

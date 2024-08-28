@@ -75,5 +75,21 @@ divi.addEventListener("click", function () {
   result.textContent = y;
 });
 
+get the file extension ---------------------------------
+let str = "system.js";
+let arr = str.split(".");
+let ext = arr.pop();
+console.log(ext);
 
+Write a JavaScript program to get the difference between a given number and 13, if the number is broader than 13 return double the absolute difference. -----------------------
+function diff(n) {
+  if (n <= 13) {
+    return (13 - n) * 2;
+  } else {
+    return n - 13;
+  }
+}
+console.log(diff(26));
+console.log(diff(3));
+console.log(diff(13));
 
