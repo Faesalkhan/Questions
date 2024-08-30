@@ -93,3 +93,29 @@ console.log(diff(26));
 console.log(diff(3));
 console.log(diff(13));
 
+Write a JavaScript program to compute the sum of the two given integers. If the two values are the same, then return triple their sum ----------------------------------- 
+function addi(x, y) {
+  if (x === y) {
+    return (x + y) * 3;
+  } else {
+    return x + y;
+  }
+}
+console.log(addi(2, 3));
+console.log(addi(9, 1));
+console.log(addi(6, 6));
+console.log(addi(5, 5));
+
+Write a JavaScript program to check a pair of numbers and return true if one of the numbers is 50 or if their sum is
+50 --------------------------------
+function check(x, y) {
+  if (x === 50 || y === 50 || x + y === 50) {
+    return true;
+  } else {
+    return false;
+  }
+}
+console.log(check(4, 5));
+console.log(check(5, 5));
+console.log(check(8, 50));
+console.log(check(25, 25));

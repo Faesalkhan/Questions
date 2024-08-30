@@ -54,7 +54,7 @@ JS has built in types for each primitive values.
 2. print a value on screen we need 'string' (1 or more characters, word, sentence).
 3. when you make a decision, you need a boolean (yes/no).
 
-array, function, object are also values types.
+null and undefined, object, are also values types.
 
 Operators ---------------------------
 unary operator : operator acting on a single value is unary operator. e.g : 'typeof'.
@@ -68,6 +68,8 @@ a = undefined;         typeof a; // "undefined"
 a = { b: "c" };        typeof a; // "object"
 see how 'a' is holding different type of value. typeof is not 'type of a' but rather 'type of value currently in a'.
 "only values have types in JS". variables are just simple container for those values.
+
+when a variable is undefined, its value is not set yet (let a; , var a;).
 
 binary operator : operator taking 2 values is binary operator.
 ternary operator : operator taking 3 values is ternary operator.
@@ -144,6 +146,8 @@ when two values compared are not of equal value type, JS implicitly kicks in and
 
 its important to remember that only non-boolean values follow 'truthy/falsy' if its actually coerced to a boolean.
 
+the result of any comparison is a strictly boolean value (true or false), regardless of what types are compared.
+
 Equality : ==, ===, !=, !==.
 == checks for value equality.
 === checks for both value and type.    it's inaccurate.
@@ -217,7 +221,7 @@ let obj = {
 reserved words cannot be used for naming varible,function,property name (if,true,false,delete,for,in...)
 
 Blocks ---------------------------
-a block is defined by wrapping one or more statements inside a curly brace pair {...} .
+a block is defined by wrapping one or more 'statements' inside a curly brace pair {...} .
 
 let amt = 99.99;
  {
@@ -282,13 +286,30 @@ each function gets its own scope.
 it is a collection of varibles as well as rules for how those variables can be accessed by name.
 Only code inside that function can access that function’s scoped variables.
 
+A variable name has to be unique within the same scope, there cannot be two different 'a' variables sitting next to each other.
+But the same variable name 'a' could appear in different scopes.
+
+function one(){
+  let a = 10;
+  console.log(a);
+}
+function two(){
+  let a = 20;
+  console.log(a);
+}
+
+one();             // 10
+two();             // 20
+
+scope can be nested inside another scope like a balloon inside a balloon. if so, the innermost scope can access variables from the either(both, of its scope and its outer's scope) scope.
+
 function outer() {
   var a = 10;
 
-  function inner() {
-    var b = 20;
-    console.log(a+b);        // here both 'a' & 'b' can be accessed
-  }
+    function inner() {
+      var b = 20;
+      console.log(a+b);        // here both 'a' & 'b' can be accessed
+    }
 
   inner();
   console.log(a);            // here only 'a' can be accessed
@@ -319,13 +340,39 @@ typeof arr;                  // object
 
 they can also have properties, like 'length', arr.length;
 
+let arr = {
+  0: "alpha",
+  1: "beta",
+  2: "charlie",
+  3 : "delta"
+}
+
+console.log(arr["0"]);
+console.log(arr["2"]);
+
+we can also use a object as an array. but it is not proper usage. its easy to use array in this case.
+let arr2 = ['apple', 'ball', 'cat', 'dog'];
+console.log(arr2[0]);
+console.log(arr2[1]);
+
 use array for numerically positioned values
 use object for named properties.
 
 function --------------------------
 it is a type of object, like obj it also can have properties (foo.bar in limited cases).
 
+function foo() {
+  let a = "hi there";
+  return a;
+}
+foo.bar = 23;
+console.log(typeof (foo));           // object , type of value currently in 'foo'
+console.log(typeof(foo()));          // string , func calling, as it is returning 'a', its type is string
+console.log(typeof(foo.bar))         // number
+
 Built-in methods -----------------
+like properties or methods.
+
 let a = "hello there";
 let b = 3.14159;
 
