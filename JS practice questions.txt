@@ -37,42 +37,67 @@ if (random == enter) {
   console.log("wrong guess, the no. was : " + random);
 }
 
-multiply and divide two numbers given by user --------------------------------- 
-<body>
+add, subtract multiply and divide two numbers given by user --------------------------------- 
+
+  <style>
+    div {
+      margin-top: 10px;
+    }
+  </style>
+  <body>
     <div>
-        <label for="firstnumber">first value : </label>
-        <input type="number" id="firstnumber" name="firstnumber" name="firstnumber">
+      <label for="firnum">enter first number</label>
+      <input type="number" id="firnum" name="firnum" value="firnum" />
     </div>
-    <div style="margin-top: 20px">
-        <label for="secondNumber">Second Number</label>
-        <input type="number" id="secondnumber" name="secondnumber" name="secondnumber">
-    </div>
-    <div style="margin-top: 20px">
-        <button type="button" id="multiply">Multiply</button>
-        <button type="button" id="divide">Divide</button>
+
+    <div>
+      <label for="secnum">enter second number</label>
+      <input type="number" id="secnum" value="secnum" />
     </div>
     <div>
-        <h5>the result is : <span id="result"></span></h5>
+      <button id="add">Add</button>
+      <button id="mul">Multiply</button>
+      <button id="divi">Divide</button>
+      <button id="minus">Minus</button>
+    </div>
+    <div>
+      <p>result is : <span id="result"></span></p>
     </div>
     <script src="./prac.js"></script>
-</body>
+  </body>
 
-let fnumber = document.getElementById("firstnumber");
-let snumber = document.getElementById("secondnumber");
+let first = document.getElementById("firnum");
+let second = document.querySelector("#secnum");
 
-let mult = document.getElementById("multiply");
-let divi = document.getElementById("divide");
+let add = document.querySelector("#add");
+let mul = document.querySelector("#mul");
+let divi = document.querySelector("#divi");
+let minus = document.querySelector("#minus");
 
 let result = document.querySelector("#result");
 
-mult.addEventListener("click", function () {
-  let x = fnumber.value * snumber.value;
-  result.textContent = x;
+add.addEventListener("click", function () {
+  let sum = Number(first.value) + Number(second.value);
+  result.textContent = sum;
+});
+
+mul.addEventListener("click", function () {
+  let cross = first.value * second.value;
+  result.textContent = cross;
 });
 
 divi.addEventListener("click", function () {
-  let y = fnumber.value / snumber.value;
-  result.textContent = y;
+  let division = first.value / second.value;
+  result.textContent = division;
+});
+
+minus.addEventListener("click", function () {
+  if (first.value >= second.value) {
+    let subtract = first.value - second.value;
+    result.textContent = subtract;
+  } else {
+    result.textContent = "first value should be greater than second value";
+  }
 });
 
 get the file extension ---------------------------------
