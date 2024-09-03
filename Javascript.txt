@@ -5,7 +5,7 @@ the rules for valid instructions and format is called syntax/computer language.
 It not only run in the browser but also on server, actually on any device having 'JS Engine'.
 Browser has embedded engine called 'Js Virtual Machine'. chrome has V8.
 
-how engine works------------------ ?
+how engine works-------------------------------------- ?
 The engine (embedded if it’s a browser) reads (“parses”) the script.
 Then it converts (“compiles”) the script to machine code (utility called 'compiler' / 'interpreter' do this).
 And then the machine code runs, pretty fast.
@@ -42,7 +42,7 @@ we just invoke the value to use it. if i want to use a number i'll simply use it
 
 part of code that holds the value is called 'expression'. multiple expression make statement. program consist of many statements.
 
-Value and Types ----------------------------
+Value and Types ------------------------------------------------
 if you go to a phone store and ask employee for cost of a phone, he says '15000'.(actual rupee figure).
 if you want to buy 2 of them, you can simply double the price of the phone. (15000*2 = 30000).
 if you pick another phone and he says 'its free', by the word 'free' you understand the cost is 0.00.
@@ -56,7 +56,7 @@ JS has built in types for each primitive values.
 
 null and undefined, object, are also values types.
 
-Operators ---------------------------
+Operators -----------------------------------------------
 unary operator : operator acting on a single value is unary operator. e.g : 'typeof'.
 
 var a;                 typeof a; // "undefined"
@@ -74,13 +74,13 @@ when a variable is undefined, its value is not set yet (let a; , var a;).
 binary operator : operator taking 2 values is binary operator.
 ternary operator : operator taking 3 values is ternary operator.
 
-Statements--------------------------- :
+Statements----------------------------------------------- :
 commands (group of words numbers and operators) that performs the task is called statement.
 we can add as many statements as we want in our program, we can separate them by semicolon (;)
 e.g : alert('Hello world') shows a alert on webpage.
 e.g : a = b * 2 ;
 
-Expression ------------------------- :
+Expression --------------------------------------------- :
 statements are made up of one or more expressions. 
 An expression is any reference to a variable or value, or set of variable and values combined with operators.
 e.g: a = b * 2;
@@ -116,7 +116,7 @@ alert("Hello")[1, 2].forEach(alert);
 --nested comments not supported
 There may not be /*...*/ inside another /*...*/.
 
-Operators --------------------
+Operators ------------------------------------------------------------
 assign operator(=) : it is used for assignment, value on the RHS(source value) is calculated and then put it into the variable we specify
 on the LHS(target variable).
 Math : +,-,*,/.
@@ -157,8 +157,8 @@ Equality : ==, ===, !=, !==.
 
 let a = 42;
 let b = "42";
-console.log(a == b);        // true
-console.log(a===b);         // false
+console.log(a == b);        // true,  both values are compared, found both different types, coerced, so true.
+console.log(a===b);         // false, both values are compared, found both different types, so false
 
 If either value (aka side) in a comparison could be the true or
 false value, avoid == and use ===.
@@ -170,7 +170,7 @@ If you can be certain about the values, and == is safe, use it!.
 If you can’t be certain about the values, use ===. It’s that simple.
 
 comparing non-primitive values like functions, objects, arrays (they are actually held by references)
-== and === matched if references matches or not, not anything about underlying values.
+== and === matched if references matches, not anything about underlying values.
 you might think that two arrays having same content will be == equal, but they are not.
 
 e.g array is coerced to simple strings joining all the values by ','.
@@ -186,8 +186,32 @@ Notably, there
 are no “strict inequality” operators that would disallow coercion the
 same way === “strict equality” does.
 
+let a = 23;
+let b = "24";
+let c = "25";
 
-Variables ------------------------------(managing the program state)
+console.log(a<b);     // true
+console.log(b<c);     // true
+in case of a<b, both values coerced to numbers (as one or both not string).
+in case of b<c, comparison is made alphabetically like a dictionary order (as both are string).
+
+console.log("apple" < "banana");       // true, a<b<c<d<....z.
+
+when we compare two different value types that are potentially different from each other, no one value cannot be made 
+into a number.
+
+let a = 8;
+let b = "eight";
+
+console.log(a < b);        // false
+console.log(b > a);        // false
+console.log(a == b);       // false
+
+as one or both are not string, "string" is coerced to invalid number/NaN. 
+NaN is neither greater nor less than any other value.
+here == is false, as 8==NaN on coersion.
+
+Variables --------------------------------------------------(managing the program state)
 we need to track a value as it changes over the course of the program, undergoing different operations.
 easiest way to do so is to assign a value to a symbolic container, called 'variable'.
 JS variable can hold any value of any type without specifying its value type.
@@ -220,7 +244,7 @@ let obj = {
 
 reserved words cannot be used for naming varible,function,property name (if,true,false,delete,for,in...)
 
-Blocks ---------------------------
+Blocks -----------------------------------------------
 a block is defined by wrapping one or more 'statements' inside a curly brace pair {...} .
 
 let amt = 99.99;
@@ -232,7 +256,7 @@ let amt = 99.99;
 these types of blocks are not generally seen. rather blocks with loops, if statement is generally seen.
 block statement does not need semicolon ; to conclude it.
 
-Conditionals -------------------------
+Conditionals ---------------------------------------------
 if a store employee tells you if you could purchase screen protection glass to phone, first you need to check your 
 current bank balance (current state of your bank balance).
 "if the condition is true then, do the following"
@@ -252,14 +276,16 @@ we can also provide the else{} block if our condition is not true.
 0, ''/"", null, undefined, false  ------> falsy
 'something', -1, 99.99.... ------> truthy
 
-Loops -----------------------
+switch case, ternary operators.
+
+Loops -------------------------------------------
 repeating a certain actions untill a certain condition fails. 
 or we can say that repeating only while the condition holds.
 (a bowler repeats bowling till the over ends or bowler gets unfit).
 each time the loop block executes is called 'iteration'.
 
 
-Functions -------------------
+Functions ---------------------------------------
 there could be a calculations for final phone purchase. she need to use that again and again for every purchase.
 here we could use the function. define it at once and use it again and again just by invoking its name using ().
 
@@ -279,7 +305,7 @@ printAmount( amount * 2 );          // "199.98"
 amount = formatAmount();
 console.log( amount );              // "$99.99"
  
-Scope ---------------------------
+Scope -----------------------------------------------
 if you ask for a phone model, she will check the store's inventory. if not found, we have to go to another store.
 in programming we have scope/lexical scope.
 each function gets its own scope.
@@ -322,7 +348,21 @@ So, code inside the inner() function has access to both variables a
 and b, but code only in outer() has access only to a—it cannot
 access b because that variable is only inside inner().
 
-Object ----------------------------
+ES6 allows to declare a variable using let keyword that belong to indivisual blocks (if block,while loop block...).
+
+function check() {
+  var a = 10;
+  if (a > 0) {
+    let b = 20;
+    console.log(b);
+  }
+  console.log(b);            // reference error, b is not defined here.
+}
+check();
+
+b declared by using let keyword, so it belong to the block (here if block), it cannot be accessed outside of it.
+
+Object ------------------------------------------------
 Object refers to a compound value where you can set properties that each hold their own values of any type.
 let obj = {
  a : "hello there",
@@ -332,7 +372,7 @@ let obj = {
 obj.a;    // 'hello there'   or   obj["a"]    // 'hello there'
 [""] is useful when properties have special characters in it.(?/ *&!...)
 
-Array ----------------------------
+Array ------------------------------------------------
 Array is an object that holds values of any type in numerically indexed positions.
 
 arr = ['hello', 42, true];
@@ -358,7 +398,7 @@ console.log(arr2[1]);
 use array for numerically positioned values
 use object for named properties.
 
-function --------------------------
+function ----------------------------------------------
 it is a type of object, like obj it also can have properties (foo.bar in limited cases).
 
 function foo() {
@@ -370,7 +410,20 @@ console.log(typeof (foo));           // object , type of value currently in 'foo
 console.log(typeof(foo()));          // string , func calling, as it is returning 'a', its type is string
 console.log(typeof(foo.bar))         // number
 
-Built-in methods -----------------
+Function scopes : we use var keyword to declare a varibale that belongs to a function.
+Hoisting : Wherever a var appears inside a scope, that declaration is taken to
+belong to the entire scope and accessible everywhere throughout.
+this behavior is called 'Hoisting'.
+
+its not common or good idea to rely on variable hoisting. hoisted functions are more common and useful.
+
+anonymous function , function expression, named function expression.
+
+Closures -------------------------------------------
+think about it as a way to remember and continue to access function's scope even once the function has finished running.
+
+
+Built-in methods -------------------------------------
 like properties or methods.
 
 let a = "hello there";
