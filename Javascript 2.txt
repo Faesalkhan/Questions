@@ -1,0 +1,50 @@
+Ability to store a value in a variable and pulling out its value gives a program a state.
+without this ability our program would be very limited.
+but where do these variables live? where are they stored? how does our program find them when it needs them?
+scope : well defined set of rules for storing the variables and finding them in later time.
+
+Compilation -----------------------------------------
+code undergoes into 3 steps.
+
+tokenizing/lexing :breaking up string into a meaningful chunks, called tokens. so var a = 2; is var, a, =, 2, ;,
+
+parsing : taking a stream/array of tokens and turning it into a tree(AST, abstract syntax tree) of nested elements,
+which collectively called grammatical structure of the program.
+tree for var a = 2; the tree will start with 
+top level node ----> variableDeclaration.
+a child node -----> identifier.
+another child node -----> assignmentExpression. itself has a child node numericLiteral(whose value is 2).
+
+code generation : process of taking AST and turning it into executable code.
+var a = 2 ; taking this AST and turn it into a machine instructions to actually create a variable a (including reserving
+memory) then store a value into a.
+
+For JS compilation occurs in microseconds or less before the code is executed.
+so JS compiler will take the program var a = 2; and compile it first, and then ready to execute it. 
+
+Undertanding scope ----------------------------------------
+the cast 
+Engine :   responsible for start-to-end compilation and execution of our JS program.
+Compiler : Engine's friend, handles all the dirty works of parsing and code-generation.
+Scope :    another friend, collects and maintains a look-up list of all the declared identifiers/variables,
+           and enforces a set of rules as how these are accessible to currently executing code.
+
+var a = 2; 
+first compiler will perform the lexing to break it down into tokens, which it will then parse into a tree.
+But when compiler gets to code-generation, it treat the program differently than somewhat assumed.
+“Allocate memory for a variable, label it a, then stick the value 2 into that variable" (unfortunately not this assumption).
+
+compiler will proceed as :
+encountering a compiler will ask the scope if particular variable already exists for that particular scope collection.
+if so then compiler ignores it and moves on. otherwise compiler asks scope to declare a variable called 'a' for
+that scope collection.
+
+compiler then produce the code for Engine to later execute, to handle the a=2 assignment.
+Engine will ask the scope if there is a variable 'a' accessible in current scope collection.
+if so then engine use it. if not then engine looks elsewhere(like in nested scope).
+
+if engine finds a variable, it assign the value 2 to it. if not engine will raise its hand and yell out an error.
+
+To summarize: two distinct actions are taken for a variable assignment:
+First, Compiler declares a variable (if not previously declared) in the
+current Scope, and second, when executing, Engine looks up the variable in Scope and assigns to it, if found.
