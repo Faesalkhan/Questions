@@ -48,3 +48,83 @@ if engine finds a variable, it assign the value 2 to it. if not engine will rais
 To summarize: two distinct actions are taken for a variable assignment:
 First, Compiler declares a variable (if not previously declared) in the
 current Scope, and second, when executing, Engine looks up the variable in Scope and assigns to it, if found.
+
+when engine executes the code, it has to 'look up' the variable 'a' to see if it has been declared, and this look-up
+is consulting scope.
+Engine would be performing LHS and RHS look-up (left or right of = assignment).
+LHS look-up : look up for value of some variable.
+RHS look-up : look up for variable container itself, so that it can asssign. (it means not LHS) (go get the value of...)
+e.g: 
+
+console.log(a);
+nothing is assigned to 'a' here. it is saying that 'go get the value of a'. so RHS look up.
+
+var a = 2 ;
+here is LHS, assigning the value to a (target) variable. (who is the target of assignment, LHS).
+
+function foo(a){
+  console.log(a);
+}
+foo(2);
+
+foo(..) is the function invoking, meaning, 'go get the value of foo and give it to me'.(its value has to be executed).
+so it is RHS.
+value 2 is passed as argument to foo, and foo received that as parameter 'a'. so assignment, so LHS.
+again console.log(..) is looking for 'a' is RHS look-up (it needs 'a' reference to be executed).
+It’s an RHS look-up for the console object, then a property resolution occurs to see if it has a method called log.
+
+"function declaration is not LHS look-up".
+
+function foo(a){
+  var b = a;
+  return a+b;
+}
+var c = foo(2);
+
+how many LHS and RHS. ----------------> 3,4
+c = ..;, a = 2 , b = ..
+foo(2.., = a;, a .. and .. b
+
+Nested Scope ---------------------------------------------------
+scope is a set of rules for looking up variables by their identifier name. there's usually more than one scope to consider.
+if scopes are nested, if a variable is not found in inner scope then engine will find it outer scope, if not then
+continuing until global scope has been reached.
+
+function foo(a) {
+  console.log(a+b);
+}
+let b = 3;
+foo(2);              // 5
+
+Errors ------------------------------------------------
+function foo(a) {
+  console.log(a+b);
+  b = a;
+}
+foo(2);
+
+Uncaught ReferenceError: b is not defined
+
+when RHS look-up is for 'b' for the first time, it will not be found in the scope. it is said to be 'undeclared'.
+If RHS lookup ever fails to find variable, this results in 'ReferenceError'. (error is type of ReferenceError).
+
+By contrast, if the engine is performing an LHS look-up, and it arrives
+at the top floor (global scope) without finding it, if the program is not running in “Strict Mode,”
+then the global scope will create a new variable of that name in the global scope, and hand it back to Engine.
+“No, there wasn’t one before, but I was helpful and created one for you.”
+
+"Strict Mode" disallows the automatic/implicit global variable creation.
+in that case LHS lookup will give a ReferenceError.
+
+if a variable is found by RHS lookup, and we are trying to do something that is not possible with that,
+(reference a property on a null or undefined value,  trying to execute as function a nonfunction value)
+then it will give type of error called 'TypeError'.
+
+ReferenceError is scope resolution-failure related, whereas TypeEr
+ror implies that scope resolution was successful, but that there was an
+illegal/impossible action attempted against the result.
+
+Unfulfilled RHS references result in ReferenceErrors being thrown.
+Unfulfilled LHS references result in an automatic, implicitly created
+global of that name (if not in Strict Mode), or a ReferenceError (if in
+Strict Mode).
