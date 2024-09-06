@@ -172,3 +172,60 @@ console.log(result);
 
 let result2 = exch("second");
 console.log(result2);
+
+check how many words having 'java' in start from the given list --------------------------------------------
+function check(name) {
+  let starting = name.substring(0, 4);
+  if (starting === "java") {
+    return true;
+  } else {
+    return false;
+  }
+}
+let count = 0;
+let arr = ["javascript", "nonjavascript", "testscript", "javaJS","javajava"];
+for (let i = 0; i < arr.length; i++) {
+  if ( check(arr[i]) == true) {
+    count++;
+  }
+}
+console.log(count);
+
+check if either a value is within the range 50-99(inclusive) ----------------------------------------
+function range(x, y) {
+  if ((x >= 50 && x <= 99) || (y >= 50 && y <= 99)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+console.log(range(49, 100));   // false
+console.log(range(49, 89));    // true
+
+how many no.s are there in range 50-99(inclusive) from given range --------------------------------------
+function range(x) {
+  if ((x >= 50 && x <= 99)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+const arr = [1, 55, 90, 100, 45, 67, 99, 55];
+let count = 0;
+for (let i = 0; i < arr.length; i++){
+  if (range(arr[i]) == true) {
+    count++;
+  }
+}
+console.log(count);
+
+find a closer no. to 100 from 2 no.s -------------------------------------------
+function check(x, y) {
+  if ((100 - x) > (100 - y)) {
+    console.log(y+' is closer');
+  }
+  else {
+    console.log(x+' is closer');
+  }
+}
+check(9, 90);
