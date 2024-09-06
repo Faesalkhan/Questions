@@ -144,3 +144,31 @@ console.log(check(4, 5));
 console.log(check(5, 5));
 console.log(check(8, 50));
 console.log(check(25, 25));
+
+Write a JavaScript program to remove a character at the specified position in a given string and return the modified string.-----------------------------------------------------
+function str(name,position) {
+  let before = name.substring(0, position);                      // num
+  let after = name.substring(position + 1, name.length);         // an
+  let finalstr = before + after;
+  return finalstr;
+}
+
+let result = str("numaan", 3);
+console.log(result);
+
+Write a JavaScript program to create a new string from a given string by changing the position of the first and last characters. The string length must be broader than or equal to 1.-----------------------------------------
+function exch(name) {
+  if (name.length <= 1) {
+    return name;
+  }
+  let mid = name.substring(1, name.length - 1);
+  let fir = name.charAt(0);
+  let las = name.charAt(name.length - 1);
+  let res = las + mid + fir;
+  return res;
+}
+let result = exch("se");
+console.log(result);
+
+let result2 = exch("second");
+console.log(result2);
