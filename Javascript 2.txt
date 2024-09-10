@@ -129,4 +129,69 @@ Unfulfilled LHS references result in an automatic, implicitly created
 global of that name (if not in Strict Mode), or a ReferenceError (if in
 Strict Mode).
 
+---------------------------------------scope bubble
+Scope consist of series of "bubbles" that each act as a container/bucket, in which identifiers (variables, functions)
+are declared.
 
+function foo(a) {
+ var b = a * 2;
+ function bar(c) {
+ console.log( a, b, c );
+ }
+ bar( b * 3 );
+}
+foo( 2 ); // 2, 4, 12
+
+Bubble 1 encompasses the global scope and has just one identifier in it: foo.
+Bubble 2 encompasses the scope of foo, which includes the three identifiers: a, bar, and b.
+Bubble 3 encompasses the scope of bar, and it includes just one identifier: c.
+
+scope bubbles are defined by where the blocks of scope are written, which one is nested inside other, etc.
+(functions creates a new bubble of scope, is it only function that does this? )
+notice how these bubbles are strictly nested. they are not crossing the boundaries.
+i.e. no bubble for some function can simultaneously exist inside two other outer scope bubbles.
+like no function can partially be inside each of two parent functions.
+
+calling bar in global scope will not work,
+bar();                    // fails
+console.log(a,b,c);       // all 3 fails
+a,b,c and bar all identifiers are available only inside foo().
+
+Scope from functions ---------------------------------------------
+each function you declare creates a bubble for itself.
+
+wrapping the code inside the function declaration makes the code hide. (making a bubble around the code).
+i.e. we can hide variables and functions by enclosing them into a scope of function.
+(you should expose only what is minimally necessary, and hide everything (Principle of least privilege)).
+as proper use of the code would discourage access to those variables/functions.
+
+consider this : 
+function doSomething(a) {
+  b = a + doSomethingElse( a * 2 );
+  console.log( b * 3 );
+}
+function doSomethingElse(a) {
+  return a - 1;
+}
+var b;
+doSomething( 2 );        // 15
+
+in this code, doSomethingElse(), b are present in global scope. then doSomething() use them.
+proper way of doing this is 
+
+function doSomething(a) {
+  function doSomethingElse(a) {
+  return a - 1;
+ }
+  var b;
+  b = a + doSomethingElse( a * 2 );
+  console.log( b * 3 );
+}
+doSomething( 2 );        // 15
+
+now b, doSomethinElse() are not accessible to any outside influence, instead controlled by doSomething().
+functionality and end result has not been affected. but design keeps private details.
+
+collision avoidance -----------------------------------------
+this is another benefit of hiding, avoiding collision between two different identifiers with same name but different
+intended usages. collision results often in unexpected overwriting of values.
