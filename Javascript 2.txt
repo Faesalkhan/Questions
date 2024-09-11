@@ -195,3 +195,93 @@ functionality and end result has not been affected. but design keeps private det
 collision avoidance -----------------------------------------
 this is another benefit of hiding, avoiding collision between two different identifiers with same name but different
 intended usages. collision results often in unexpected overwriting of values.
+
+https://medium.com/@swati.developer17/part-10-block-scope-function-scope-and-shadowing-in-js-eb0043b93588
+
+var a = 9;
+function foo() {
+    var a = 19;
+    console.log(a);       // 19
+}
+foo();
+console.log(a);           // 9
+
+here we have to call functions foo(), to execute its code. we want that code without calling foo().
+
+here function is treated as an expression---------------------
+
+var a = 9;
+(function foo() {
+  var a = 19;
+  console.log(a);
+})();
+console.log(a);
+
+first pair of () makes it a expression and another pair of () executes it.
+it is also called IIFE (Immediately Invoked Function Expression).
+if 'function' is at beginning then it is function declaration. otherwise expression.
+
+Anonymous function -----------------------
+here is the function expressions as callback parameters.
+
+setTimeout( function(){
+ console.log("I waited 1 second!");
+}, 1000 );
+
+here function has no name identifier on it.
+function expression can be anonymous but function declaration cannot omit the name (that would be illegal).
+(many suggest to use function expression, but it has its own drawbacks, providing name to it will address all drawbacks)
+
+setTimeout( function timeoutHandler(){        //Look, I have a name!
+ console.log( "I waited 1 second!" );
+}, 1000 );
+
+Blocks as Scopes ---------------------------------------------------------
+
+for (var i=0; i<10; i++) {
+ console.log( i );
+}
+
+variable declaring using 'var' are available to global and function scope (they are not block scoped).
+it means that in the above example 'var' is available for 'for' loop as well as outside of it.
+so it is not desirable (against the rule of PLP).
+Block scope is a tool to extend the earlier Principle of Least Privilege from hiding information in functions to hiding information in blocks of our code.
+
+later ES6 introduced 'let' and 'const' which are block scoped (attaches variables to the scope of block).
+(it hijacks block's scope for its variable decalaration).
+
+{
+  let a = 10;
+  console.log(a);         // 10
+}
+console.log(a);           // ReferenceError: a is not defined
+
+A particular case where let shines is in the for loop.
+for (let i=0; i<10; i++) {
+ console.log( i );
+}
+console.log( i ); // ReferenceError
+
+Not only does let in the for loop header bind the i to the for loop body, but in fact, it rebinds it to each iteration
+of the loop, making sure to reassign it the value from the end of the previous loop iteration.
+{
+ let j;
+ for (j=0; j<10; j++) {
+ let i = j; // re-bound for each iteration!
+ console.log( i );
+ }
+}
+
+try/catch ----------------------------------------------------------------
+It’s a very little known fact that JavaScript in ES3 specified the variable
+declaration in the catch clause of a try/catch to be block-scoped to
+the catch block.
+For instance:
+try {
+ undefined(); // illegal operation to force an exception!
+}
+catch (err) {
+ console.log( err ); // works!
+}
+console.log( err ); // ReferenceError: `err` not found
+
