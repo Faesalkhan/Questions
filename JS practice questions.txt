@@ -229,3 +229,46 @@ function check(x, y) {
   }
 }
 check(9, 90);
+
+capitalize the first letter of each word in a given string. -------------------------------------
+
+function makeUpper(name) {
+  let spl = name.split(" ");
+  var result = "";
+  for (let i = 0; i < spl.length; i++) {
+    let eachword = spl[i];
+    let substring = eachword.substring(1, eachword.length);
+    let firstword = eachword.charAt(0).toUpperCase();
+    let word = firstword + substring;
+    result = result + " " + word;
+  }
+  console.log(result);
+}
+makeUpper("read even if you cannot read");
+
+---------- or ---------------
+
+function makeUpper(name) {
+  name = name.split(" ");
+  for (let i = 0; i < name.length; i++) {
+    name[i] = name[i][0].toUpperCase() + name[i].substring(1);
+  }
+  return name.join(" ");
+}
+console.log(makeUpper("read even if you can't read"));
+
+convert given numerical value into hr:min format -------------------------------
+function makehrsmins(time) {
+    let hrs = Math.floor(time / 60);
+    let mins = (time % 60);
+    let intomins = hrs +":"+ mins;
+    return intomins;
+}
+console.log(makehrsmins(500));
+
+
+
+
+
+
+
