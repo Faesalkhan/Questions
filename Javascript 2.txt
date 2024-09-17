@@ -409,3 +409,60 @@ else {
 }
 
 it is always best to avoid declaring functions in blocks.
+
+------------------------------ Closure 
+Closure is when a function is able to remember and access its lexical scope even when that function is executing outside its lexical scope.
+
+function foo() {
+ var a = 2;
+ function bar() {
+ console.log( a );        // 2
+ }
+ bar();
+}
+foo();
+
+function bar() has a closure over the scope of foo(). even also over the global scope it has access to (in our example), but it is said that 
+bar() has formed the closure over the scope of foo(). why? because bar() appears nested inside the foo().
+
+above example is not the ideal example for closure.
+consider this :
+
+function foo() {
+ var a = 2;
+ function bar() {
+ console.log( a );
+ }
+ return bar;
+}
+var baz = foo();
+baz();                // 2 -- Whoa, closure was just observed, man.
+
+bar() is executed outside of its declared lexical scope.
+As bar() has a lexical scope closure over that inner scope of foo(), which keeps that scope alive for bar()
+to reference at any later time. bar() still has a reference to that scope, and that reference is called closure.
+
+function wait(message) {
+ setTimeout( function timer(){
+ console.log( message );
+ }, 1000 );
+}
+wait( "Hello, closure!" );
+
+essentially whenever and wherever you treat functions (that access their own respective lexical scopes) as first-class values and pass them around, you are likely to see those functions exercising closure. Be that timers, event handlers, Ajax requests, crosswindow messaging, web workers, or any of the other asynchronous (or synchronous!) tasks, when you pass in a callback function, get ready to sling some closure around!.
+
+Loops and closures --------------------------
+for (var i=1; i<=5; i++) {
+ setTimeout( function timer(){
+ console.log( i );
+ }, i*1000 );
+}
+
+here we expect 1 to 5 to be printed each at after 1s interval. but thats not we see here. we see 7 printing at 1s interval everytime.
+The var keyword in JavaScript has function scope, not block scope. This means that the variable i is shared across all iterations of the loop.
+by the time timer executes, for loop is already completed and i has been incremented to 6. (same global scope, not block scopes)
+
+we need per-iteration block scope. we can do so using 'let' keyword for declaring varibales in loop.
+
+
+

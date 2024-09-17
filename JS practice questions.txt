@@ -266,9 +266,95 @@ function makehrsmins(time) {
 }
 console.log(makehrsmins(500));
 
+count the vowels in given string ------------------------------------
+function countVowels(name) {
+  return name.replace(/[^aeiou]/g, "").length;
+}
+console.log(countVowels("read even"));
 
+------------------- or ------------
+function countVowels(name) {
+  var count = 0;
+  for (let i = 0; i < name.length; i++) {
+    if (
+      name[i] == "a" ||
+      name[i] == "e" ||
+      name[i] == "i" ||
+      name[i] == "o" ||
+      name[i] == "u"
+    ) {
+      count++;
+    }
+  }
+  console.log(count);
+}
+countVowels("namee");
 
+check if ps and ts are equal ------------------------------
+function pteq(str) {
+  let pcount = str.replace(/[^p]/g, "").length;
+  let tcount = str.replace(/[^t]/g, "").length;
+  if (pcount === tcount) {
+    return true;
+  } else {
+    return false;
+  }
+}
+console.log(pteq("xyzppttt"));
 
+create new copy the string / repeat the string n times into new string ------------------------
+function copy(str, nos) {
+  if (str.length === 0) {
+    return false;
+  } else {
+    return str.repeat(nos);          // return new string, without changing the original string value
+  }
+}
+console.log(copy("abc",5));
+console.log(copy('copy', 2));
 
+create a string of 4 copies, of last 3 characters, string should be of atleast 3 chars -----------------------------
+function copy(str, nos) {
+  if (str.length > 3) {
+    let lastings = str.substring(str.length - 3);
+    return lastings.repeat(nos);
+  }
+}
+console.log(copy("python", 3));
+
+take first half of a even string only -----------------------
+function fhalf(str) {
+  if (str.length % 2 === 0) {
+    return str.substring(0, str.length / 2);
+    // return str.slice(0, str.length / 2);
+  }
+  return str;
+}
+console.log(fhalf("javascript"));
+console.log(fhalf("tatapapa"));
+console.log(fhalf("tatapapaa"));
+
+write first and last character from string -----------------------
+function name(str) {
+  return str.slice(1, str.length - 1);
+}
+console.log(name('javascript'));                      // avascript
+
+bring last three characters on the front of a string ---------------------------
+function three(str) {
+  if (str.length > 3) {
+    let last = str.slice(str.length - 3);
+    let final = last + str;
+    return final.slice(0,final.length-3)
+  }
+}
+console.log(three('javascript'));
+
+-------- or -------------------------- j=-10, a=-9, v=-8, a=-7, s=-6, c=-5, r=-4, i=-3, p=-2, t=-1
+  if (str.length > 3) { 
+    return str.slice(-3) + str.slice(0, -3);
+  }
+}
+console.log(three('javascript'));
 
 
