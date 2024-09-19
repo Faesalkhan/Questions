@@ -1,0 +1,110 @@
+This ----------------------------------
+lets understand what 'this' is not. 'this' refers to the function itself (its wrong).
+
+function foo(num) {
+  console.log("count " + num);
+  this.count++;
+}
+foo.count = 0;
+
+for (var a = 0; a < 10; a++){
+  if (a > 5) {
+    foo(a);                      // 6, 7, 8, 9
+  }
+}
+console.log(foo.count);          // 0,  wtf?
+
+here, function foo is adding a property 'count' to the functions object foo.
+but inside the foo, 'this' is not refering to function object foo. 
+
+we need a identifier that will refer the function foo inside it. suppose we have,
+function foo() {
+  foo.count = 4;
+  console.log(foo.count); 
+}
+foo();                         // 4
+here foo inside the function declaration 'foo' is refering to itself (from inside). working fine.
+
+consider,
+setTimeout( function(){
+// it is anonymous func
+},1000);
+here, callback func passed to setTimeout is not having any declaration, so there's no proper way to refer the function obj itself.
+
+so solution to our problem could be refering the function foo using its declaration.
+function foo(num) {
+  console.log("count "+num);
+  foo.count++
+}
+foo.count = 0;
+for (var a = 0; a < 10; a++){
+  if (a > 5) {
+    foo(a);                   // 6, 7, 8, 9
+  }
+}
+console.log(foo.count);       // 4
+
+we'll see later how could we use the 'this' so solve our problem.
+
+'this' refers to the function's (lexical) scope. its wrong.
+in one sense there is some truth. but is not always true.
+
+To be clear, 'this' does not, in anyway refer to function's lexical scope.
+
+function foo() {
+  var a = 9;
+  this.bar();
+}
+function bar() {
+  console.log(this.a);
+}
+foo();          // ReferenceError: undefined
+
+we cannot use 'this' reference to look something up in a lexical scope. it is not possible.
+there is no possible bridge between lexical scope look-ups and 'this'.
+
+what is 'this' ?
+it is not an author time binding but a runtime binding. it is contextual based on the function's invocation.
+'this' binding is nothing to do with the 
+where the function is declared, but instead has everything to do with 
+the manner in which the function is invoked.
+
+when a function is invoked, an execution context is created, it maintains the record of information about 
+where the function was called from,
+how function was invoked, 
+parameters, local variables, scope chain, 
+it also hold the record of the 'this' reference.
+
+call site --------------
+to understans 'this' binding, we have to first understand the call-site (location in code where a function is called, not where its is declared). it is like 'go locate where a function is called from'.
+
+consider the code, think in terms of call-stack.
+function baz() {
+  console.log('baz');
+  bar();
+}
+function bar() {
+  console.log('bar');
+  foo();
+}
+function foo() {
+  console.log('foo');
+}
+baz();
+
+call-stack keeps track of function execution. when a function is called, it is pushed into call-stack. once the function completes,
+it is popped off the stack, and the interpreter returns to the function that called it.
+
+in the above code, in global scope, baz is called, so stack will have baz inside it.
+call-site is the global scope.
+
+inside baz we have bar calling, so bar is pushed into stack. here stack will have baz,bar (side by side).
+(when bar is called inside the baz, bar's EC will not be created inside the baz, instead new EC will be created independently of baz).
+call-site for bar is inside the baz function.
+
+inside bar we have foo calling, so foo is pushed into stack. here stack will have baz,bar,foo (side by side).
+call-site for foo is inside the bar function.
+
+when foo completes the execution, foo is popped out of stack,here stack will have baz,bar.
+when bar completes the execution, bar is popped out of stack,here stack will have baz.
+when baz completes the execution, baz is popped out of stack,here stack will have nothing.
