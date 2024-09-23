@@ -81,6 +81,8 @@ add.addEventListener("click", function () {
   result.textContent = sum;
 });
 
+// in javasript, form input returns string. so fir.value, sec.value will be string.
+
 mul.addEventListener("click", function () {
   let cross = first.value * second.value;
   result.textContent = cross;
@@ -92,8 +94,10 @@ divi.addEventListener("click", function () {
 });
 
 minus.addEventListener("click", function () {
-  if (first.value >= second.value) {
-    let subtract = first.value - second.value;
+  let f = Number(first.value);
+  let s = Number(second.value);
+  if (f >= s) {
+    let subtract = Number(first.value) - Number(second.value);         // or, f - s , as both are Number wrapped;
     result.textContent = subtract;
   } else {
     result.textContent = "first value should be greater than second value";
@@ -106,7 +110,12 @@ let arr = str.split(".");
 let ext = arr.pop();
 console.log(ext);
 
-Write a JavaScript program to get the difference between a given number and 13, if the number is broader than 13 return double the absolute difference. -----------------------
+or ------------
+let str = "file.js";
+console.log(str.split(".")[1]);
+
+
+Write a JavaScript program to get the difference between a given number and 13, if the number is less than 13 return double the absolute difference. -----------------------
 function diff(n) {
   if (n <= 13) {
     return (13 - n) * 2;
@@ -156,6 +165,16 @@ function str(name,position) {
 let result = str("numaan", 3);
 console.log(result);
 
+----------- or remove the particular character from strin ---------------- in this case only first character in the occurence will get removed.
+function name(str, removechr) {
+  let ind = str.indexOf(removechr);
+  let f = str.slice(0, ind);
+  let l = str.slice(ind+1);
+  return f+l;
+}
+console.log(name('javascript', 's'));          // javacript
+console.log(name('numaan','a'));               // numan
+
 Write a JavaScript program to create a new string from a given string by changing the position of the first and last characters. The string length must be broader than or equal to 1.-----------------------------------------
 function exch(name) {
   if (name.length <= 1) {
@@ -172,6 +191,13 @@ console.log(result);
 
 let result2 = exch("second");
 console.log(result2);
+
+----- 0r ------------------------------
+function name(str) {
+  return str.slice(-1) + str.slice(1, -1) + str.slice(0, 1);        // only slice works with -ve indices of string in JS. t=-1, p=-2,.......
+}
+console.log(name('javascript'));
+
 
 check how many words having 'java' in start from the given list --------------------------------------------
 function check(name) {
@@ -334,7 +360,7 @@ console.log(fhalf("javascript"));
 console.log(fhalf("tatapapa"));
 console.log(fhalf("tatapapaa"));
 
-write first and last character from string -----------------------
+remove first and last character from string -----------------------
 function name(str) {
   return str.slice(1, str.length - 1);
 }
