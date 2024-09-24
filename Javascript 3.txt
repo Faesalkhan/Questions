@@ -108,3 +108,105 @@ call-site for foo is inside the bar function.
 when foo completes the execution, foo is popped out of stack,here stack will have baz,bar.
 when bar completes the execution, bar is popped out of stack,here stack will have baz.
 when baz completes the execution, baz is popped out of stack,here stack will have nothing.
+
+Rules -----------------
+after inspecting the call site, we see which rule is applicable.
+1st rule/default binding rule : comes from function call/invocation. this rule is default catch-all rule. 
+(if any other not applicable, then it is applicable).
+
+first thing to note that when we declare a variable using 'var', in the global scope/outside the function, 
+it becomes the property of the global object. (not let or const) so we can say that 
+var a = 2;      ===       window.a = 2;         (in global scope)
+we also know that 'var' is function scoped. so 'this' inside the function refers to the global object.
+
+function foo() {
+ console.log( this.a );
+}
+var a = 2;
+foo();            // 2
+
+here function foo is called in the global context, without any function reference, and since there is no other explicit binding,
+'this' inside the foo refers to global obj. (so default binding rule).
+
+if strict mode is applied, then call-site of foo is irrelevant.
+function foo() {
+ "use strict";
+ console.log( this.a );
+}
+var a = 2;
+foo();            // TypeError: `this` is `undefined`
+
+2nd rule/implicit binding ------------
+function foo() {
+    console.log(this.a);
+}
+const obj = {
+    a:2,
+    foo : foo,
+}
+obj.foo();
+foo();
+
+when we declare the function foo, assign the foo function as property to the obj has nothing to do with the owning/containing by obj.
+when function foo is called (the way in which it is called, see the call-site) we could say that obj contain/owns the function foo reference
+at the time of function call.
+
+so when there is an context object for function reference, the 2nd rule say that its that object that should be used for the function's
+call 'this' binding. Because obj is the 'this' for the foo() call.
+only the top level/last level of an object property reference matters to the call-site.
+
+function foo() {
+    console.log(this.a);
+}
+const obj = {
+    a:24,
+    foo : foo,
+}
+const obj2 = {
+    a: 34,
+    obj : obj,
+}
+obj2.obj.foo();          // 24
+
+implicitly lost -------------------
+function foo() {
+    console.log(this.a);
+}
+var obj = {
+    a: 2,
+    foo : foo,
+}
+var bar = obj.foo;
+var a = "it is global property";
+bar();                              // it is global property
+
+here, see the call-site of bar(), it is in global scope, not having any owning/contain. so default binfing.
+it appears that bar() will refer the obj. but it is not the case.
+
+same is true for callback function.
+function foo() {
+ console.log( this.a );
+}
+function doFoo(fn) {
+ // `fn` is just another reference to `foo`
+ fn(); // <-- call-site!
+}
+var obj = {
+ a: 2,
+ foo: foo
+};
+var a = "oops, global";          // `a` also property on global object
+doFoo( obj.foo );                // "oops, global"
+
+
+function foo() {
+ console.log( this.a );
+}
+var obj = {
+ a: 2,
+ foo: foo
+};
+var a = "oops, global";           // `a` also property on global object
+setTimeout( obj.foo, 100 );       // "oops, global"
+
+ 
