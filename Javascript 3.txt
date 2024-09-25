@@ -76,7 +76,8 @@ parameters, local variables, scope chain,
 it also hold the record of the 'this' reference.
 
 call site --------------
-to understans 'this' binding, we have to first understand the call-site (location in code where a function is called, not where its is declared). it is like 'go locate where a function is called from'.
+to understans 'this' binding, we have to first understand the call-site (location in code where a function is called, not where its is declared). 
+it is like 'go locate where a function is called from'.
 
 consider the code, think in terms of call-stack.
 function baz() {
@@ -153,7 +154,7 @@ at the time of function call.
 
 so when there is an context object for function reference, the 2nd rule say that its that object that should be used for the function's
 call 'this' binding. Because obj is the 'this' for the foo() call.
-only the top level/last level of an object property reference matters to the call-site.
+only the top level/last level of an object property reference matters to the call-site. (here last level is obj)
 
 function foo() {
     console.log(this.a);
@@ -168,6 +169,10 @@ const obj2 = {
 }
 obj2.obj.foo();          // 24
 
+here, obj2.obj refers the obj object.
+foo() is then invoked on obj, meaning value of 'this' inside the foo() function refers to obj, not obj2. so this.a resolves to obj.a i.e 24.
+'this' inside foo refers obj. thus this.a looksup 'a' property inside obj.
+
 implicitly lost -------------------
 function foo() {
     console.log(this.a);
@@ -180,7 +185,7 @@ var bar = obj.foo;
 var a = "it is global property";
 bar();                              // it is global property
 
-here, see the call-site of bar(), it is in global scope, not having any owning/contain. so default binfing.
+here, see the call-site of bar(), it is in global scope, not having any owning/contain. so default binding.
 it appears that bar() will refer the obj. but it is not the case.
 
 same is true for callback function.
@@ -209,4 +214,48 @@ var obj = {
 var a = "oops, global";           // `a` also property on global object
 setTimeout( obj.foo, 100 );       // "oops, global"
 
- 
+Explicit binding ------------------------------------------
+what if we want a function to use a particular object for 'this' binding ?
+in JS mostly all functions we create have access to call and apply. 
+they both take 1st an object to use fot the 'this' and then invoke the function with that 'this' specified.
+(we are sating what the 'this' to be)(so called explicit binding).
+
+function foo() {
+    console.log(this.a);   
+}
+var obj = {
+    a: 3,
+    foo : foo,
+}
+foo.call(obj);              // 3
+
+here we are forcing the foo function to refer the 'this' to obj.
+unfortunately explicit binding does not provide the solution for losing 'this' binding.
+
+new Binding ----------------------------------
+in other languages, 'new' is used for creating the instance of a class. when we create this, along with that constructor of that class
+is called. 
+But in javascript, this is not same case using new keyword (it is not doing the same thing here).
+there is no connection to object oriented functionality of 'new' usage in JS.
+
+what is constructor is JS? in JS constructors are just functions, that happened to be called with 'new' operator in from of them.
+they are not attached to classes, nor they are instantiating a class. 
+they are not even a special type of function.
+they are just regular function that are, in assence, hijacked by the use of 'new' in their invocation.
+
+when 'new' is used in front of a function, it makes that function call a 'constructor call' / construction calls of function. following happens
+1. A brand new object is created (aka constructed) out of thin air.
+2. The newly constructed object is [[Prototype]]-linked.
+3. The newly constructed object is set as the this binding for that function call.
+4. Unless the function returns its own alternate object, 
+   the new invoked function call will automatically return the newly constructed object.
+
+function foo(a) {
+  this.a = a;
+}
+var bar = new foo(2);
+console.log(bar.a);          // 2
+
+using 'new' in front of foo has constructed an object, and set that object as 'this' for the call of foo().
+so new is the final way that a function call's this can be bound. (calles new binding).
+
