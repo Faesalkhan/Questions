@@ -1,0 +1,190 @@
+Object
+
+objects are the general building blocks upon which much of JS is built. it is one of 6 'types' in JS.
+string, boolean, number, null, undefined are not themselves objects.
+null is sometimes referred to as an object (typeof null is object).
+
+function is subtype of object, also called as callable object/first class. they can be handled like any other plain object.
+arrays are also a form of object with extra behaviours. they are slightly more stuctured than general objects.
+
+there are other subtype of object 'built-in objects'.
+String
+Number
+Boolean
+Array
+Object
+Function
+Date
+RegExp
+Error
+
+all these, built-in objects appear to be actual types, even classes (yes if they are in java).
+but in JS they are actually just built-in functions. they can be used as a constructor.
+
+var strPrimitive = "I am a string";
+typeof strPrimitive;                                 // "string"
+strPrimitive instanceof String;                      // false
+strPrimitive is a primitive value. not an object. 
+it is also not an instance of String constructor. just primitive type. so false instance.
+
+var strObject = new String( "I am a string" );
+typeof strObject;                                    // "object"
+strObject instanceof String;                         // true
+
+primitive value "I am a string" is not an object. its a literal primitive and immutable value. to perform operations on it 
+(checking length accessing its indivisual characters...), we need String object.
+so how is it works,
+
+let str = "madmaxx";
+console.log(str.length);               // 7
+console.log(str.charAt(0));            // m
+console.log(str.substring(3));         // maxx
+
+let num = 42.6767;
+console.log(num.toFixed(2));
+
+it is because JS coerce the string primitives into String obj when necessary. that is why we don't need to create String obj for that everytime.
+same is true for literal number, which is converted into Number. same for boolean.
+so commonly we use literal form rather than object form.
+
+null and undefined have no wrapper object form.
+Date can be created only with their constructed form. they dont have literal form counterpart.
+
+Objects, Arrays, Functions, and RegExps all are objects whether literal or constructed form is used.
+their constructed forms offer more options than their literal counterparts.
+
+literal way of creating object is universally accepted. create obj using consructed way only if to have more options.
+
+Content ----------------------
+content of an object means properties (we can store any type values).
+where we store a value in object? at pointers/references. to access that value we use that reference along .[dot]/[] operator.
+".a" it is called "property access". super-fun refernce of obj could not be accessed using dot.
+["a"] is called "key access".        we could access it as ["super-fun"].
+
+let obj = {
+  a : 2
+}
+console.log(obj.a);          // 2
+console.log(obj["a"]);       // 2
+
+in objects, property names are always string. if you use other value, then it will be converted/coerced into string. (even numbers).
+let obj = {};
+
+obj[1] = "one";
+obj[2] = "two";
+console.log(obj["1"]);   // two
+console.log(obj[2]);     // two
+console.log(obj["2"]);   // two
+
+ES6 adds computed property names, where you can specify an expression, 
+surrounded by a [ ] pair, in the key-name position of an objectliteral declaration:
+
+var prefix = "foo";
+var myObject = {
+ [prefix + "bar"]: "hello",
+ [prefix + "baz"]: "world"
+};
+myObject["foobar"]; // hello
+myObject["foobaz"]; // world
+
+Array -------------------------------
+they are more structured, values are stored in locations, usually called indices.
+we can also add properties onto the array.
+
+let arr = ["mic", "check", "one", "two"];
+arr[4] = "three";
+arr.baz = "baz"
+console.log(arr);        // ["mic", "check", "one", "two", "three", baz:"baz"];
+
+let arr = ["mic", "check", "one", "two"];
+console.log(arr);
+console.log(arr.length);                        // 4
+arr.baz = "baz"
+console.log(arr);
+console.log(arr.length);                        // 4
+
+Notice that adding named properties (regardless of . or [ ] operator
+syntax) does not change the reported length of the array. 
+ 
+if we try to add a property, using any numeric value, the proprty will be added to index. this change the content of array.
+let arr = ["mic", "check", "one", "two"];
+console.log(arr);
+console.log(arr.length);              // 4
+arr.baz = "baz"
+console.log(arr);                     // 4
+arr["4"] = "three"
+console.log(arr.length);              // 5
+
+here ["4"] is coerced to number/index, thus added the value at index no. 4.
+Use objects to store key/value pairs, and arrays to store values at numeric indices.
+
+Duplicating Objects --------------------------------
+shallow copy, only references are copied. one changes -----> other changes.
+function anotherFunction() {
+  console.log("another function");
+}
+let anotherObject = {
+  c: true,
+};
+let anotherArray = [];
+
+let myobject = {
+  a: 2,
+  b: anotherObject,
+  c: anotherFunction,
+  d : anotherArray
+}
+console.log(myobject.a);
+console.log(myobject.b);
+console.log(myobject.c);
+console.log(myobject.d);
+anotherArray.push(anotherObject,myobject)
+
+In JavaScript, when you define an object or an array, you're working with references to the actual memory location of those objects.
+when you assign myobject.d = anotherArray, you're not copying the array, you're storing a reference to the array. 
+Any changes made to the array via that reference will be reflected in all other references.
+
+when you use anotherArray.push(anotherObject, myobject), it modifies the array that both myobject.d and anotherArray are pointing to.
+(changing any reference will cause to change the all related references). here both refer to same array.
+
+so.... it is not the copying of object. solution??? for a deep copy(changes in the original wont affect the copied objects), we could use.
+
+var newObj = JSON.parse( JSON.stringify( someObj ) );
+JSON.stringify(someObj)  function converts someObj into a JSON string.
+
+let someObj = { a: 1, b: { c: 2 } };
+let jsonString = JSON.stringify(someObj);
+console.log(jsonString);                        // '{"a":1,"b":{"c":2}}'
+
+JSON.parse(jsonString)  function takes a JSON string and parses it back into a JavaScript object.
+It essentially creates a new object with the same structure and data as someObj.
+
+let newObj = JSON.parse(jsonString);
+console.log(newObj);                            // { a: 1, b: { c: 2 } }
+
+its limitations, objects containing functions and methods are not copied because JSON only supports basic data types 
+(objects, arrays, strings, numbers, booleans, null).
+Special object types like Date, RegExp, Map, Set, etc., will not be copied properly because JSON doesn't support them natively.
+
+
+var newObj = Object.assign( {}, myObject );  
+Object.assign(target, ...sources) is a method that copies the enumerable properties from one or more source objects to a target object.
+The target object is {}, which is an empty object. so all the copied properties will go into this {}.
+The source object is myObject, which contains the properties you want to copy.
+
+let myObject = { a: 1, b: 2, c: 3 };
+let newObj = Object.assign({}, myObject);
+
+newObj.c = 30;
+console.log(myObject.c);                          // 3
+here original is not affecting.
+
+but if source object contains nested object then, they are not deeply copied but referenced.
+
+let myObject = { a: 1, b: { c: 3 } };
+let newObj = Object.assign({}, myObject);
+
+newObj.b.c = 10;
+console.log(myObject.b.c);                       // 10
+original is affected.
+

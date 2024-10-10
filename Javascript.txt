@@ -125,7 +125,7 @@ Compound : +=, -=, *=, /=.
 Equality : ==, ===, !=, !==.
 comparison : <, >, <=, >= 
 logical : &&, ||.
-object propert access (dot operator) : 'Obj.a' means object value called Obj with a property of the name 'a'.
+object property access (dot operator) : 'Obj.a' means object value called Obj with a property of the name 'a'.
 or we can access like Obj["a"].
 
 Comparing values / Type conversion --------------------------- coersion.
@@ -138,8 +138,8 @@ console.log(a);         // '45'
 console.log(b);         // 45
 
 this is the example of explicit coersion. (we are converting one type of type value to another one).
-when two values compared are not of equal value type, JS implicitly kicks in and covert the value type to mathcing value types.
-(implicit coersin).
+when two values compared are not of equal value type, JS implicitly kicks in and covert the value type to matching value types.
+(implicit coersion).
 
 0, ''/"", null, undefined, false                  ------> falsy
 'something', -1, 99.99, array, obj, functions.... ------> truthy
@@ -153,7 +153,7 @@ Equality : ==, ===, !=, !==.
 === checks for both value and type.    it's inaccurate.
 
 == checks for value equality with coersion allowed.
-=== checks for value equality without coersion allowed ("strict equality").
+=== checks for value equality without coersion ("strict equality").
 
 let a = 42;
 let b = "42";
@@ -327,7 +327,8 @@ function two(){
 one();             // 10
 two();             // 20
 
-scope can be nested inside another scope like a balloon inside a balloon. if so, the innermost scope can access variables from the either(both, of its scope and its outer's scope) scope.
+scope can be nested inside another scope like a balloon inside a balloon. if so, the innermost scope can access variables from the either
+(both, of its scope and its outer's scope) scope.
 
 function outer() {
   var a = 10;
