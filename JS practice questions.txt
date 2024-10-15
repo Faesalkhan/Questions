@@ -245,7 +245,7 @@ for (let i = 0; i < arr.length; i++){
 }
 console.log(count);
 
-find a closer no. to 100 from 2 no.s -------------------------------------------
+find a closer no. to 100 from any given two no.s -------------------------------------------
 function check(x, y) {
   if ((100 - x) > (100 - y)) {
     console.log(y+' is closer');
@@ -258,19 +258,24 @@ check(9, 90);
 
 capitalize the first letter of each word in a given string. -------------------------------------
 
-function makeUpper(name) {
-  let spl = name.split(" ");
-  var result = "";
-  for (let i = 0; i < spl.length; i++) {
-    let eachword = spl[i];
-    let substring = eachword.substring(1, eachword.length);
-    let firstword = eachword.charAt(0).toUpperCase();
-    let word = firstword + substring;
-    result = result + " " + word;
-  }
-  console.log(result);
+function capitalize(str) {
+    let fchar = str.charAt(0).toUpperCase();
+    let rest = str.slice(1);
+    return fchar+rest
 }
-makeUpper("read even if you cannot read");
+
+function sentence(sen) {
+    let words = sen.split(" ");
+    let finalstring = "";
+    for (let a = 0; a < words.length; a++){
+       finalstring = finalstring + capitalize(words[a]) +" ";
+    }
+    return finalstring;
+}
+
+console.log(sentence("read even if you cannot read"));
+console.log(sentence("hi there how are you"));
+
 
 ---------- or ---------------
 
@@ -283,14 +288,15 @@ function makeUpper(name) {
 }
 console.log(makeUpper("read even if you can't read"));
 
-convert given numerical value into hr:min format -------------------------------
-function makehrsmins(time) {
-    let hrs = Math.floor(time / 60);
-    let mins = (time % 60);
-    let intomins = hrs +":"+ mins;
-    return intomins;
+convert given numerical value into hr:min / hh:mm format -------------------------------
+function hrminsformat(mins) {
+    let hr = Math.floor(mins / 60);
+    hr < 10 ? hr = "0" + hr : hr;
+    let min = mins % 60;
+    min === 0 ? min = min + "0": min;
+    return (hr+":"+min)
 }
-console.log(makehrsmins(500));
+console.log(hrminsformat(180));                  // 03:00
 
 count the vowels in given string ------------------------------------
 function countVowels(name) {
@@ -316,7 +322,29 @@ function countVowels(name) {
 }
 countVowels("namee");
 
-check if ps and ts are equal ------------------------------
+check if a string is having same p and t ------------------------------
+function countchar(st,char1,char2,count1=0, count2=0) {
+    for (let a = 0; a < st.length; a++){
+        if (st[a] === char1) {
+            count1++;
+        } else if (st[a] === char2) {
+            count2++;
+        }
+    }
+    if (count1 === count2) {
+    return true;
+   // console.log(`have same ${char1} and ${char2}`);
+    
+    } else {
+    return true;
+   //     console.log(`don't have same ${char1} and ${char2}`);
+        
+
+    }
+}
+console.log(countchar("javassrrrs", "s", "r"));
+// countchar("javapptttp", "p", "t");
+----------------- or ------------------------
 function pteq(str) {
   let pcount = str.replace(/[^p]/g, "").length;
   let tcount = str.replace(/[^t]/g, "").length;
@@ -328,7 +356,39 @@ function pteq(str) {
 }
 console.log(pteq("xyzppttt"));
 
+check if a two strings having same/equal p or not-----------------------------------
+function countchar(st,char,count=0) {
+    for (let a = 0; a < st.length; a++){
+        if (st[a] === char) {
+            count++
+        }
+    }
+    return count;
+}
+function charsequals(str1, str2, ch) {
+    let c1 = countchar(str1,ch);
+    let c2 = countchar(str2,ch);
+    if (c1 === c2) {
+        console.log(`both have equal  ${ch}`);
+        
+    }
+    else {
+        console.log(`dont have equal ${ch}`);
+        
+    }
+}
+charsequals("apbpcpp", "qpwpepp","p");
+
 create new copy the string / repeat the string n times into new string ------------------------
+function repeatt(str,x) {
+    let contained = "";
+    for (let a = 0; a < x; a++){
+        contained = contained + str;
+    }
+    return contained;
+}
+console.log(repeatt("javasctipt",3));
+---------------- or ----------------------------
 function copy(str, nos) {
   if (str.length === 0) {
     return false;
@@ -339,7 +399,17 @@ function copy(str, nos) {
 console.log(copy("abc",5));
 console.log(copy('copy', 2));
 
-create a string of 4 copies, of last 3 characters, string should be of atleast 3 chars -----------------------------
+create a string of 4 copies, of last 3 characters, string should be of atleast 3 chars -------------------
+function repeatt(str,x) {
+    let lastthree = str.slice(-3);
+    let contained = ""
+    for (let i = 0; i < x; i++){
+        contained = contained + lastthree;
+    }
+    return contained;
+}
+console.log(repeatt("javascript",4));
+------------ or --------------------------
 function copy(str, nos) {
   if (str.length > 3) {
     let lastings = str.substring(str.length - 3);
