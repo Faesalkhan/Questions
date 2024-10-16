@@ -165,7 +165,7 @@ function str(name,position) {
 let result = str("numaan", 3);
 console.log(result);
 
------------ or remove the particular character from strin ---------------- in this case only first character in the occurence will get removed.
+----------- or remove the particular character from string ---------------- in this case only first character in the occurence will get removed.
 function name(str, removechr) {
   let ind = str.indexOf(removechr);
   let f = str.slice(0, ind);
@@ -197,7 +197,6 @@ function name(str) {
   return str.slice(-1) + str.slice(1, -1) + str.slice(0, 1);        // only slice works with -ve indices of string in JS. t=-1, p=-2,.......
 }
 console.log(name('javascript'));
-
 
 check how many words having 'java' in start from the given list --------------------------------------------
 function check(name) {
@@ -246,15 +245,17 @@ for (let i = 0; i < arr.length; i++){
 console.log(count);
 
 find a closer no. to 100 from any given two no.s -------------------------------------------
-function check(x, y) {
-  if ((100 - x) > (100 - y)) {
-    console.log(y+' is closer');
-  }
-  else {
-    console.log(x+' is closer');
+function closerToHundred(x, y) {
+  if (100 - x < 100 - y) {
+    console.log(`${x} is closer than ${y}`);
+  } else if (x === y) {
+    console.log("both are at same position");
+  } else {
+    console.log(`${y} is closer than ${x}`);
   }
 }
-check(9, 90);
+closerToHundred(5, 50);
+closerToHundred(50, 50);
 
 capitalize the first letter of each word in a given string. -------------------------------------
 
@@ -453,4 +454,24 @@ console.log(three('javascript'));
 }
 console.log(three('javascript'));
 
+==============================================================================================================
+convert each word's first character to uppercase ------------------------------------------
+let writing = "How can mirrors be real if our eyes aren't real";
+
+function firstCharUpper(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+String.prototype.toJadenCase = function() {
+    let spl = this.split(" ");
+    let finalString = "";
+    for (let a = 0; a < spl.length; a++) {
+        finalString = finalString + firstCharUpper(spl[a]) + " ";
+    }
+    return finalString.trim();
+};
+
+console.log(writing.toJadenCase());
+
+making a function using 'String.prototype' is making a method available to use on all instances of String.(like charAt(),trim(),......)
 
