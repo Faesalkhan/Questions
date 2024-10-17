@@ -455,6 +455,19 @@ console.log(three('javascript'));
 console.log(three('javascript'));
 
 ==============================================================================================================
+reverse the string ---------------------------------
+function reverse(str) {
+    return str.split('').reverse().join('');
+}
+console.log(reverse("world"));
+console.log(reverse("reverse"));
+
+remove the spaces from the string ------------------------
+function noSpace(x) {
+    return x.split(" ").join('')
+}
+console.log(noSpace("8 j 8   mBliB8g  imjB8B8  jl  B"));
+
 convert each word's first character to uppercase ------------------------------------------
 let writing = "How can mirrors be real if our eyes aren't real";
 
@@ -474,4 +487,36 @@ String.prototype.toJadenCase = function() {
 console.log(writing.toJadenCase());
 
 making a function using 'String.prototype' is making a method available to use on all instances of String.(like charAt(),trim(),......)
+
+check if a string ends with a given "string" ----------------------------------------
+function solution(str, end) {
+  if (str.endsWith(end)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+console.log(solution("abcde", "cde"));     // true
+console.log(solution("abcde", "abc"));     // false
+
+------------ or ----------------------------- without using endsWith method
+function solution(str, ending) {
+    return str.slice(0 - ending.length) === ending;
+}
+console.log(solution("abcde","cde"));    // true
+console.log(solution("abcde","abc"));    // false
+
+check if a string have a "string" in the ending -----------------------------------
+function solution(str, starting) {
+    return str.startsWith(starting);
+}
+console.log(solution("abcde","abc"));         // true
+console.log(solution("abcde","ac"));          // false
+
+---------------- or ----------------------------without using startsWith method
+function solution(str, starting) {
+    return str.slice(0,starting.length)===starting
+}
+console.log(solution("abcde","abc"));
+console.log(solution("abcde","acc"));
 
