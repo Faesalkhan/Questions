@@ -506,7 +506,7 @@ function solution(str, ending) {
 console.log(solution("abcde","cde"));    // true
 console.log(solution("abcde","abc"));    // false
 
-check if a string have a "string" in the ending -----------------------------------
+check if a string have a "string" in the starting -----------------------------------
 function solution(str, starting) {
     return str.startsWith(starting);
 }
@@ -519,4 +519,85 @@ function solution(str, starting) {
 }
 console.log(solution("abcde","abc"));
 console.log(solution("abcde","acc"));
+
+count the sheeps ----------------------------------
+const sheep = [true,  true,  true,  false,
+  true,  true,  true,  true ,
+  true,  false, true,  false,
+  true,  false, false, true ,
+  true,  true,  true,  true ,
+  false, false, true,  true];
+
+function countSheeps(sheep) {
+  let count=0;
+  for(let a=0; a<sheep.length; a++){
+    if(sheep[a]===true){
+      count++;
+    }
+  }
+  return count;
+}
+console.log(countSheeps(sheep));
+
+------------- or ----------------------------
+let count = sheep.filter(x => x === true).length;
+console.log(count);
+
+if number is even then multiply it by 8 , if it is odd then multiply by 9 ------------------------
+function simpleMultiplication(number) {
+ return (number%2===0 ? number*8 : number*9)
+}
+console.log(simpleMultiplication(8));
+console.log(simpleMultiplication(9));
+
+filter the list of friends, your friends have 4 characters -----------------------------
+function friend(friends){
+    let output = [];
+    for(let a=0; a<friends.length; a++){
+      if(friends[a].length===4){
+        output.push(friends[a]);
+      }
+    }
+    return output;
+  }
+console.log(friend(["Ryan", "Kieran", "Jason", "Yous"]));
+-------------------------------- or ------------------
+function friend(friends) {
+    return friends.filter(x => x.length === 4);
+}
+console.log(friend(["Ryan", "Kieran", "Jason", "Yous"]));
+
+
+from given two string make a single string containing all unique values from both (no duplicates)--------------
+function longest(s1, s2) {
+    let output = [];
+    let final = s1 + s2;
+    let sorted = final.split('').sort();
+    for (let a = 0; a < sorted.length; a++){
+        if (!output.includes(sorted[a])) {                      // Determines whether an array includes a certain element, returning true or false as appropriate
+            output.push(sorted[a]);
+        }
+    }
+    return output.join('');
+}
+console.log(longest("aretheyhere","yestheyarehere"));
+
+create a function , 1st para should be operation(+/-*) 2nd and 3rd should be values ----------------------------------
+function basicOp(operation, value1, value2) {
+  if (!isNaN(value1) && !isNaN(value2)) {
+    if (operation === "+") {
+      return value1 + value1;
+    } else if (operation === "-") {
+      return value1 - value2;
+    } else if (operation === "*") {
+      return value1 * value2;
+    } else {
+      return value1 / value2;
+    }
+  }
+  return 0;
+}
+console.log(basicOp("-", 10, 20));
+
+
 
