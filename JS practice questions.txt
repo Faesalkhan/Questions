@@ -519,7 +519,7 @@ function solution(str, starting) {
 }
 console.log(solution("abcde","abc"));
 console.log(solution("abcde","acc"));
-
+ 
 count the sheeps ----------------------------------
 const sheep = [true,  true,  true,  false,
   true,  true,  true,  true ,
@@ -599,5 +599,59 @@ function basicOp(operation, value1, value2) {
 }
 console.log(basicOp("-", 10, 20));
 
+accum("abcd") -> "A-Bb-Ccc-Dddd" -------------------------------------
+function accum(s) {
+  let splitted = s.split("");
+  let finalstr = "";
+  for (let a = 0; a < splitted.length; a++) {
+    let part = splitted[a].toUpperCase() + splitted[a].toLowerCase().repeat(a);
+    finalstr = finalstr + part + (a < splitted.length - 1 ? "-" : "");
+  }
+  return finalstr;
+}
+console.log(accum("ZpglnRxqenU"));
+
+------------------------ or ------------------------
+function accum(str) {
+   return str.split('').map((e,i)=> str[i].toUpperCase()+str[i].toLowerCase().repeat(i)+(i<str.length-1?"-":"")).join('')
+}
+console.log(accum("abcdefgh"));
+
+Every day you rent the car costs $40. If you rent the car for 7 or more days, you get $50 off your total. Alternatively, 
+if you rent the car for 3 or more days, you get $20 off your total.
+function carRentalCost(d) {
+    return d * 40 - (d >= 7 ? 50 : (d >= 3 ? 20 : 0));
+}
+-------------or ---------------------
+function carRentalCost(d) {
+    let cost = 0;
+    if (d >= 7) {
+        cost = (d * 40) - 50;
+    } else if (d >= 3) {
+        cost = (d * 40) - 20;
+    } else {
+        cost = d * 40;
+    }
+    return cost
+}
+
+if name equals owner then "hello boss" else "hello guest" ----------------------------
+function greet (name, owner) {
+    return "Hello " + (name === owner ? "Boss" : "Guest");
+}
+
+we have colors named a to m, if any other color appear return it in form of count/string's length.
+like : s="aaaxbbbbyyhwawiwjjjwwm" --------------------> 8/22;  
+function printerEror(s){
+    let spl = spl.split('');
+    let output = [];
+    let count=0;
+  for(let i=0; i<spl.length; i++){
+     if(spl[i] < 'a' || spl[i]>'m'){
+       output.push(spl[a]);
+     }
+  }
+  return output.length+"/"+s.length;
+}
 
 
