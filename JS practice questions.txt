@@ -654,4 +654,67 @@ function printerEror(s){
   return output.length+"/"+s.length;
 }
 
+check Isogram string (An isogram is a word that has no repeating letters, also gG is repeated)function isIsogram(str) {
+    let spl = str.split('');
+    for (let a = 0; a < spl.length; a++){
+        for (let b = a + 1; b < spl.length; b++){
+            if (spl[a].toLowerCase() === spl[b].toLowerCase()) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+console.log(isIsogram("gmsheG"));            // false
+
+make a function that returns a string, every char is repeated twice, like "String"-----> "SSttrriinngg".
+function doubleChar(str) {
+   let spl = str.split('');
+  let output = [];
+  for (let i = 0; i < spl.length; i++){
+    output.push(spl[i] + spl[i]);
+  }
+  return output.join("");
+}
+
+----- or ------ 
+const doubleChar = (str) => str.split("").map(c => c + c).join("");
+
+whethe a particular element is present in array or not-----------------------------------
+function check(a, x) {
+  for (let i = 0; i < a.length; i++){
+    if (x === a[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+------ or ------------------
+function check(a, x) {
+  return a.find(value=> value===x)? true : false;
+}
+------ or -----------------
+function check(a, x) {
+  return a.includes(x);
+}
+
+find second largest number in array ----------------------------------------
+function secondLargest(arr) {
+  let max = arr[0];
+  let final = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (max < arr[i]) {
+      max = arr[i];
+    }
+  }
+  final = arr.filter((x) => x != max);
+  let secmax = final[0];
+  for (let i = 0; i < final.length; i++) {
+    if (secmax < final[i]) {
+      secmax = final[i];
+    }
+  }
+  return secmax;
+}
+console.log(secondLargest([1, 2, 3, 4,5,66,77]));
 
