@@ -654,7 +654,8 @@ function printerEror(s){
   return output.length+"/"+s.length;
 }
 
-check Isogram string (An isogram is a word that has no repeating letters, also gG is repeated)function isIsogram(str) {
+check Isogram string (An isogram is a word that has no repeating letters, also gG is repeated)-----------------------------
+function isIsogram(str) {
     let spl = str.split('');
     for (let a = 0; a < spl.length; a++){
         for (let b = a + 1; b < spl.length; b++){
@@ -717,4 +718,33 @@ function secondLargest(arr) {
   return secmax;
 }
 console.log(secondLargest([1, 2, 3, 4,5,66,77]));
+
+check if string is alphanumeric(no white spaces,underscore,null)-------------------------------
+function alphanumeric(str) {
+    let regex = /^[a-zA-Z0-9]+$/;
+    return regex.test(str);
+}
+
+============================ seconds are given, convert them into "xx hour(s), xx minute(s) and xx second(s)"======================
+function formatDuration(seconds) {
+  let hrs, mins, secs;
+  if (seconds >= 3600) {
+    hrs = Math.floor(seconds / 3600);
+    mins = Math.floor((seconds % 3600) / 60);
+    secs = seconds % 60;
+    return `${hrs} hour${hrs > 1 ? "s" : ""}${
+      mins > 0 || secs > 0 ? ", " : ""
+    }${mins < 1 ? "" : mins + " minute"}${mins > 1 ? "s" : ""} ${secs>0?"and":""} ${
+      secs === 0 ? "" : secs + " second"
+    }${secs > 1 ? "s" : ""}`;
+  } else {
+    mins = Math.floor(seconds / 60);
+    secs = seconds % 60;
+    return `${mins === 0 ? "" : mins + " minute"}${mins > 1 ? "s" : ""} ${secs>0?"and":""} ${
+      secs === 0 ? "" : +secs + " second"
+    }${secs > 1 ? "s" : ""}`;
+  }
+}
+console.log(formatDuration(3662));         // 1 hour, 1 minute and 2 seconds
+
 
