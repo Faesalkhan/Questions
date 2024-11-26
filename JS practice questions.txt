@@ -747,4 +747,15 @@ function formatDuration(seconds) {
 }
 console.log(formatDuration(3662));         // 1 hour, 1 minute and 2 seconds
 
-
+------------------------------------------- convert string into positions as a=1, b=2, c=3,..............
+function alphabetPosition(text) {
+  let alphabets = 'abcdefghijklmnopqrstuvwxyz';
+  let output = [];
+  for (let char of text.toLowerCase()){
+    let positions = alphabets.indexOf(char) + 1;
+    if (positions > 0) {
+    output.push(positions);
+    }
+  }
+  return output;
+}
