@@ -759,3 +759,23 @@ function alphabetPosition(text) {
   }
   return output;
 }
+
+------------------------------ string may contain polish vowels, replace all them into english vowels
+function correctPolishLetters(string) {
+  const polishVowels = {
+    ą: "a",
+    ć: "c",
+    ę: "e",
+    ł: "l",
+    ń: "n",
+    ó: "o",
+    ś: "s",
+    ź: "z",
+    ż: "z",
+  };
+  let result = "";
+  for (let i = 0; i < string.length; i++){
+    result = result + (polishVowels[string[i]] || string[i]);
+  }
+  return result;
+}
